@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment } from "react";
+import styled from "styled-components";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import GlobalStyle from "../src/components/shared/theme/globalStyle";
+import Header from "./components/Header";
+import Landing from "./components/Landing";
+import Login from './components/Login'
+// import firebase from "./firebase";
 
-function App() {
+// firebase
+//   .firestore()
+//   .collection("times")
+//   .add({
+//     title: "Rubiks cube",
+//     time: "45s"
+//   });
+
+const AppWrapper = styled.div`
+  background-color: #fafafa;
+`;
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <GlobalStyle />
+      <AppWrapper>
+        <Header />
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/" component={Landing} />
+            <Route exact path="/login" component={Login} />
+          </Switch>
+        </BrowserRouter>
+      </AppWrapper>
+    </Fragment>
   );
-}
+};
 
 export default App;
