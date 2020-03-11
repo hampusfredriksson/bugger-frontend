@@ -1,12 +1,12 @@
 import React from "react";
-import Button from "../components/shared/Button";
+import Button from "./Shared/Button";
 
 const Landing = () => {
   return (
     <>
       <div>
         <h1>Bugger</h1>
-        <h2 className="lead">Share and display bug reports at a glance.</h2>
+        <h2>Share and display bug reports at a glance.</h2>
         <Button primary>This is a second test</Button>
       </div>
     </>
