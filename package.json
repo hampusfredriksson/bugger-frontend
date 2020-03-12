@@ -23,7 +23,6 @@
     "eject": "react-scripts eject",
     "release": "release-it",
     "analyze": "source-map-explorer 'build/static/js/*.js'"
-
   },
   "eslintConfig": {
     "extends": "react-app"

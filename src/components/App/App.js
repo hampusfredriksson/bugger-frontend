@@ -15,7 +15,7 @@ import AdminPage from "../Admin/Admin";
 
 import * as ROUTES from "../../constants/routes";
 
-import firebase from "../../firebase";
+import firebase from "../../components/Firebase/firebase";
 // firebase
 //   .firestore()
 //   .collection("testing")
@@ -28,6 +28,7 @@ const AppWrapper = styled.div`
   width: 100%;
   margin: auto;
 `;
+
 const App = () => {
   return (
     <Fragment>
