@@ -15,15 +15,6 @@ import AdminPage from "../Admin/Admin";
 
 import * as ROUTES from "../../constants/routes";
 
-import firebase from "../../components/Firebase/firebase";
-// firebase
-//   .firestore()
-//   .collection("testing")
-//   .add({
-//     title: "Hampes cube",
-//     time: "13s"
-//   });
-
 const AppWrapper = styled.div`
   width: 100%;
   margin: auto;
