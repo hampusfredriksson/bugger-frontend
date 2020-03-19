@@ -5,8 +5,8 @@ const Landing = () => {
   return (
     <>
       <div>
-        <h1>Bugger</h1>
-        <h2>Share and display bug reports at a glance.</h2>
+        <h2>Bugreports as they should be. </h2>
+        <h3>Share and display bug reports at a glance.</h3>
         <Button primary>This is a second test</Button>
       </div>
     </>
