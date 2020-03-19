@@ -1,13 +1,16 @@
 import React from "react";
-import Spinner  from "../Shared/Spinner";
+import Spinner from "../Shared/Spinner";
+import withAuthorization from "../Session/withAuthorization";
 
-const Home = () => {
-  return (
-    <div>
-      <h1>This is Home page</h1>
-      <Spinner />
-    </div>
-  );
-};
+const Home = () => (
+  <div>
+    <h1>This is Home page</h1>
 
-export default Home;
+    <p> Only accesible by signed in users, right??</p>
+    <Spinner />
+  </div>
+);
+
+const condition = (authUser) => authUser != null;
+
+export default withAuthorization(condition)(Home);
