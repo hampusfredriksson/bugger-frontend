@@ -1,11 +1,15 @@
 import { createGlobalStyle } from 'styled-components'
+require('typeface-roboto')
+require('typeface-fira-code')
 
 const GlobalStyle = createGlobalStyle`
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  padding: 0; 
+  background-color: #434C5E;
+  text-align: center;
+  justify-content: center;
+  font-family: 'Roboto';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

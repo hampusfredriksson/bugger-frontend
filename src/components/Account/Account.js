@@ -1,11 +1,17 @@
-import React from 'react'
+import React from "react";
+import { AuthUserContext, withAuthorization } from "../Session/";
 
-const Account = () => {
-  return (
-    <div>
-      <h1>Account Page</h1>
-    </div>
-  )
-}
+const Account = () => (
+  <AuthUserContext.Consumer>
+    {(authUser) => (
+      <div>
+        <h1>Account Page</h1>
+        <h2>This account belongs to {authUser.email}</h2>
+      </div>
+    )}
+  </AuthUserContext.Consumer>
+);
 
-export default Account
+const condition = (authUser) => !!authUser;
+
+export default withAuthorization(condition)(Account);

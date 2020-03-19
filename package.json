@@ -14,8 +14,10 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
     "recompose": "^0.30.0",
-    "source-map-explorer": "^2.3.1",
-    "styled-components": "^5.0.1"
+    "source-map-explorer": "^2.4.0",
+    "styled-components": "^5.0.1",
+    "typeface-fira-code": "^1.1.4",
+    "typeface-roboto": "0.0.75"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -41,6 +43,6 @@
     ]
   },
   "devDependencies": {
-    "release-it": "^13.1.0"
+    "release-it": "^13.1.1"
   }
 }

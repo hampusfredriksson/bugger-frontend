@@ -3,21 +3,20 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Logo from "../images/bugger.png";
 import Button from "./Shared/Button";
-const Nav = styled.div`
-  background-color: #fff;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.0975);
+
+const Nav = styled.div` 
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.50);
 `;
 const NavHeader = styled.div`
-  max-width: 1010px;
-  padding: 26px 20px;
-  width: 100%;
+padding: 3px;
+  width: 98%;
   display: flex;
   align-items: center;
   margin: 0 auto;
 `;
 const NavLeft = styled.div`
   width: 33.333%;
-  text-align: center;
+  text-align: left;
 `;
 const NavCenter = styled.div`
   width: 33.333%;
@@ -43,7 +42,7 @@ const Input = styled.input`
 `;
 const NavRight = styled.div`
   width: 33.333%;
-  text-align: center;
+  text-align: right;
 `;
 
 const ProfileImage = styled.img`
@@ -53,10 +52,8 @@ const ProfileImage = styled.img`
 `;
 
 const LogoImage = styled.img`
-  border-radius: 50%;
-  background-color: coral;
-  width: 70px;
-  padding: 5px;
+  width: 100px;
+  padding: 0px;
 `;
 
 const Header = () => {
