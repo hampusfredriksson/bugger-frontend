@@ -1,5 +1,5 @@
 import React from "react";
-import Spinner from "../Shared/Spinner";
+import Spinner from "../Styles/Spinner";
 import withAuthorization from "../Session/withAuthorization";
 
 const Home = () => (

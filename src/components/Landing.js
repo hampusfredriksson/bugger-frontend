@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "./Shared/Button";
+import Button from "./Styles/Button";
 
 const Landing = () => {
   return (
