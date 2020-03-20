@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import GlobalStyle from "../Shared/Theme/GlobalStyle";
 
 import Navigation from "../Navigation";
 import Header from "../Header";
@@ -16,6 +15,8 @@ import AdminPage from "../Admin/Admin";
 import * as ROUTES from "../../constants/routes";
 import { withAuthentication } from "../Session";
 
+// deploy test
+
 const AppWrapper = styled.div`
   width: 100%;
   margin: auto;
@@ -23,7 +24,6 @@ const AppWrapper = styled.div`
 
 const App = () => (
   <>
-    <GlobalStyle />
     <AppWrapper>
       <BrowserRouter>
         <Header />
