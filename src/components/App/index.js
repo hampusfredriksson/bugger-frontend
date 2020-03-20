@@ -14,10 +14,8 @@ import AdminPage from "../Admin/Admin";
 
 import * as ROUTES from "../../constants/routes";
 import { withAuthentication } from "../Session";
-import { GlobalStyle } from "../Styles/GlobalStyle";
+import { GlobalStyle } from ".././Styles/GlobalStyle";
 
-
-// testing
 
 const AppWrapper = styled.div`
   width: 100%;
