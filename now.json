@@ -1,0 +1,14 @@
+{
+  "build": {
+    "env": {
+      "API_KEY": "@api-key",
+      "AUTH_DOMAIN": "@auth-domain",
+      "DATABASE_URL": "@db-url",
+      "PROJECT_ID": "@project-id",
+      "STORAGE_BUCKET": "@storage-bucket",
+      "MESSAGING_SENDER_ID": "@msg-sender-id",
+      "ID": "@id",
+      "MEASUREMENT_ID": "@measure-id"
+    }
+  }
+}
