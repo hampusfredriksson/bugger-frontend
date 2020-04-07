@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Logo from "../images/bugger.png";
-import Button from "./Styles/Button";
+
 
 const Nav = styled.div`
   box-shadow: 0 4px 5px rgba(0, 0, 0, 0.5);
@@ -51,7 +51,7 @@ const Header = () => {
         <NavCenter>
         </NavCenter>
         <NavRight>
-          <Link to="/login">
+          <Link to="/home">
             <ProfileImage src="https://api.adorable.io/avatars/285/abott@adorable.png" />
           </Link>
         </NavRight>
