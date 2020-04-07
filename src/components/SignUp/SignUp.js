@@ -3,7 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import { compose } from "recompose";
 import * as ROUTES from "../../constants/routes";
 import { withFirebase } from "../Firebase";
-import styled from 'styled-components'
+import styled from "styled-components";
 
 const Form = styled.form`
   position: absolute;
@@ -31,8 +31,7 @@ const Button = styled.button`
   transition: all 0.3 ease;
   cursor: pointer;
   &:hover {
-  background-color: #6d7c9c;
-
+    background-color: #6d7c9c;
   }
 `;
 
@@ -59,7 +58,7 @@ const INITIAL_STATE = {
   email: "",
   passwordOne: "",
   passwordTwo: "",
-  error: null
+  error: null,
 };
 
 class SignUpFormBase extends Component {
@@ -74,6 +73,14 @@ class SignUpFormBase extends Component {
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then((authUser) => {
+        return this.props.firebase.user(authUser.user.uid).set(
+          {
+            email,
+          },
+          { merge: true }
+        );
+      })
+      .then(() => {
         this.setState({ ...INITIAL_STATE });
         this.props.history.push(ROUTES.HOME);
       })
@@ -96,42 +103,45 @@ class SignUpFormBase extends Component {
 
     return (
       <>
-      <Form onSubmit={this.onSubmit}>
-        <h2>Sign up</h2>
+        <Form onSubmit={this.onSubmit}>
+          <h2>Sign up</h2>
 
-        <Input
-          name="email"
-          value={email}
-          onChange={this.onChange}
-          type="text"
-          placeholder="your email address"
-        />
-        <Input
-          name="passwordOne"
-          value={passwordOne}
-          onChange={this.onChange}
-          type="password"
-          placeholder="password"
-        />
-        <Input
-          name="passwordTwo"
-          value={passwordTwo}
-          onChange={this.onChange}
-          type="password"
-          placeholder="confirm password"
-        />
-        <Button disabled={isInvalid} type="submit">
-          Sign Up
-        </Button>
-      </Form>
+          <Input
+            name="email"
+            value={email}
+            onChange={this.onChange}
+            type="text"
+            placeholder="your email address"
+          />
+          <Input
+            name="passwordOne"
+            value={passwordOne}
+            onChange={this.onChange}
+            type="password"
+            placeholder="password"
+          />
+          <Input
+            name="passwordTwo"
+            value={passwordTwo}
+            onChange={this.onChange}
+            type="password"
+            placeholder="confirm password"
+          />
+          <Button disabled={isInvalid} type="submit">
+            Sign Up
+          </Button>
+        </Form>
         {error && <p>{error.message}</p>}
-    </>
+      </>
     );
   }
 }
 const SignUpLink = () => (
   <p>
-    Don't have an account? <Link style={{ color: '#FFF' }} to={ROUTES.SIGN_UP}>Sign Up</Link>
+    Don't have an account?{" "}
+    <Link style={{ color: "#FFF" }} to={ROUTES.SIGN_UP}>
+      Sign Up
+    </Link>
   </p>
 );
 
