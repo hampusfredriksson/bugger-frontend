@@ -7,14 +7,15 @@ body {
   background-color: #434C5E;
   text-align: center;
   justify-content: center;
-  font-family: 'Roboto';
+  font-family: 'Roboto', Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: 'Fira Code', Courier, Monaco, monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 `;
