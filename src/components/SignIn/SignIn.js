@@ -59,7 +59,7 @@ const SignInPage = () => (
 const INITIAL_STATE = {
   email: "",
   password: "",
-  error: null
+  error: null,
 };
 
 class SignInFormBase extends Component {
@@ -94,31 +94,29 @@ class SignInFormBase extends Component {
     const isInvalid = password === "" || email === "";
 
     return (
-      <>
-        <Form onSubmit={this.onSubmit}>
-          <h2>Login</h2>
-          <Input
-            name="email"
-            value={email}
-            onChange={this.onChange}
-            type="text"
-            placeholder="email"
-          />
-          <Input
-            name="password"
-            value={password}
-            onChange={this.onChange}
-            type="password"
-            placeholder="password"
-          />
-          <Button disabled={isInvalid} type="submit">
-            Sign in
-          </Button>
+      <Form onSubmit={this.onSubmit}>
+      <h2>Sign In</h2>
+        <Input
+          name="email"
+          value={email}
+          onChange={this.onChange}
+          type="text"
+          placeholder="email"
+        />
+        <Input
+          name="password"
+          value={password}
+          onChange={this.onChange}
+          type="password"
+          placeholder="password"
+        />
+        <Button disabled={isInvalid} type="submit">
+          Sign In
+        </Button>
+        <SignUpLink />
 
-          <SignUpLink />
-        </Form>
         {error && <p>{error.message}</p>}
-      </>
+      </Form>
     );
   }
 }
