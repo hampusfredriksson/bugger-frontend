@@ -4,6 +4,7 @@ import { compose } from "recompose";
 import * as ROUTES from "../../constants/routes";
 import { withFirebase } from "../Firebase";
 import styled from "styled-components";
+const axios = require("axios");
 
 const Form = styled.form`
   position: absolute;
@@ -73,12 +74,32 @@ class SignUpFormBase extends Component {
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then((authUser) => {
-        return this.props.firebase.user(authUser.user.uid).set(
-          {
-            email,
-          },
-          { merge: true }
-        );
+        let idToken = authUser.user.xa;
+        console.log("🚀: SignUpFormBase -> onSubmit -> idToken", idToken);
+        console.log("🚀: SignUpFormBase -> onSubmit -> authUser", authUser);
+        return this.props.firebase
+          .user(authUser.user.uid)
+          .set(
+            {
+              email,
+            },
+            { merge: true }
+          )
+          .then(() => {
+            let data = JSON.stringify({
+              password: this.state.passwordOne,
+              username: this.state.email,
+            });
+            axios.get(
+              "http://localhost:5001/bugger-d1c9b/us-central1/app/hello",
+              data,
+              {
+                headers: {
+                  Authorization: "Bearer " + idToken,
+                },
+              }
+            );
+          });
       })
       .then(() => {
         this.setState({ ...INITIAL_STATE });
