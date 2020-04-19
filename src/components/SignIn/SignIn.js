@@ -4,6 +4,7 @@ import { compose } from "recompose";
 import styled from "styled-components";
 import { SignUpLink } from "../SignUp/SignUp";
 import { withFirebase } from "../Firebase";
+import axios from "axios";
 
 import * as ROUTES from "../../constants/routes";
 
@@ -73,9 +74,20 @@ class SignInFormBase extends Component {
     const { email, password } = this.state;
     this.props.firebase
       .doSignInWithEmailAndPassword(email, password)
-      .then(() => {
+      .then((authUser) => {
         this.setState({ ...INITIAL_STATE });
         this.props.history.push(ROUTES.HOME);
+        let idToken = authUser.user.xa;
+        console.log("🚀:  -> onSubmit -> idToken", idToken);
+        console.log("🚀:  -> onSubmit -> authUser", authUser);
+        axios.get("http://localhost:5001/bugger-d1c9b/us-central1/app/hello", {
+          headers: {
+            Authorization: "Bearer " + idToken,
+          },
+        });
+      })
+      .then((req, res) => {
+        console.log(req, res);
       })
       .catch((error) => {
         this.setState({ error });
@@ -95,7 +107,7 @@ class SignInFormBase extends Component {
 
     return (
       <Form onSubmit={this.onSubmit}>
-      <h2>Sign In</h2>
+        <h2>Sign In</h2>
         <Input
           name="email"
           value={email}
