@@ -16,7 +16,6 @@ import * as ROUTES from "../../constants/routes";
 import { withAuthentication } from "../Session";
 import { GlobalStyle } from ".././Styles/GlobalStyle";
 
-
 const AppWrapper = styled.div`
   width: 100%;
   margin: auto;
@@ -24,7 +23,7 @@ const AppWrapper = styled.div`
 
 const App = () => (
   <>
-  <GlobalStyle />
+    <GlobalStyle />
     <AppWrapper>
       <BrowserRouter>
         <Header />
@@ -38,7 +37,7 @@ const App = () => (
             path={ROUTES.PASSWORD_FORGET}
             component={PasswordForgetPage}
           />
-          <Route exact path={ROUTES.HOME} component={HomePage} />
+          <Route exact path={`${ROUTES.HOME}/:id`} component={HomePage} />
           <Route exact path={ROUTES.ACCOUNT} component={AccountPage} />
           <Route exact path={ROUTES.ADMIN} component={AdminPage} />
         </Switch>
