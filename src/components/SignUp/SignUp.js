@@ -4,7 +4,7 @@ import { compose } from "recompose";
 import * as ROUTES from "../../constants/routes";
 import { withFirebase } from "../Firebase";
 import styled from "styled-components";
-const axios = require("axios");
+import axios from "axios";
 
 const Form = styled.form`
   position: absolute;
@@ -81,7 +81,9 @@ class SignUpFormBase extends Component {
           .user(authUser.user.uid)
           .set(
             {
-              email,
+              email: email,
+              timestamp: Date.now(),
+              uid: authUser.user.uid
             },
             { merge: true }
           )
