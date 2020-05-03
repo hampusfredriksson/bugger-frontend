@@ -1,16 +1,70 @@
-import React from "react";
-import Spinner from "../Styles/Spinner";
-import withAuthorization from "../Session/withAuthorization";
+import React, { useState, useEffect } from "react";
+import { db } from "../Firebase/firebase";
 
-const Home = () => (
-  <div>
-    <h1>This is Home page</h1>
+const Home = ({ match }) => {
+  const [report, setReport] = useState(null);
 
-    <p> Only accesible by signed in users, right??</p>
-    <Spinner />
-  </div>
-);
+  useEffect(() => {
+    var docRef = db.collection("testing").doc(match.params.id);
 
-const condition = (authUser) => authUser != null;
+    docRef
+      .get()
+      .then((doc) => {
+        console.log(doc.data());
+        setReport(doc.data());
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
-export default withAuthorization(condition)(Home);
+  return (
+    <div>
+      {report && (
+        <>
+          {report.model}
+          {report.original}
+          {report.os}
+          {report.osVersion}
+        </>
+      )}
+    </div>
+  );
+};
+
+export default Home;
+
+// const Home = () => {
+
+//   db.collection("cities").doc("LA").set({
+//     name: "Los Angeles",
+//     state: "CA",
+//     country: "USA"
+// })
+// .then(function() {
+//     console.log("Document successfully written!");
+// })
+// .catch(function(error) {
+//     console.error("Error writing document: ", error);
+// });
+// //   const [cinemas, setCinemas] = useState([]);
+
+// //   useEffect(() => {
+// //     const fetchData = async () => {
+// //       const db = Firebase.firestore()
+// //       const data = await db.collection("cinemas").get();
+// //       setCinemas(data.docs.map((doc) => doc.data()));
+// //     };
+// //     fetchData();
+// //   }, []);
+
+//   return (
+//     <ul>
+//    <p>testing</p>
+//     </ul>
+//   );
+// };
+
+// export default Home;
+// const condition = (authUser) => authUser != null;
+// export default withAuthorization(condition)(Home);
