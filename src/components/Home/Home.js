@@ -5,7 +5,7 @@ const Home = ({ match }) => {
   const [report, setReport] = useState(null);
 
   useEffect(() => {
-    var docRef = db.collection("testing").doc(match.params.id);
+    let docRef = db.collection("testing").doc(match.params.id);
 
     docRef
       .get()
@@ -16,19 +16,24 @@ const Home = ({ match }) => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [match]);
 
   return (
-    <div>
-      {report && (
-        <>
-          {report.model}
-          {report.original}
-          {report.os}
-          {report.osVersion}
-        </>
-      )}
-    </div>
+    console.log(JSON.parse('{"name": "John"}')),
+    (
+      <div>
+        {report && (
+          <>
+            <ul>
+              App Build:
+              <li>{report.app_build}</li>
+              App Version:
+              <li>{report.app_version}</li>
+            </ul>
+          </>
+        )}
+      </div>
+    )
   );
 };
 
