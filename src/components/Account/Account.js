@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { AuthUserContext, withAuthorization } from "../Session/";
 import styled from "styled-components";
 import Button from "../Styles/Button";
-// const firebase = require('firebase/app');
+import Spinner from "../Styles/Spinner";
 
 const ApiKey = styled.div`
   display: flex;
@@ -26,7 +26,10 @@ const Code = styled.code`
 const Account = () => {
   const [{ ...debugUrl }, setdebugUrl] = useState("");
 
+  const [isLoading, setIsLoading] = useState(false);
+
   async function handleClick() {
+    setIsLoading(true);
     try {
       const data = {
         resolution: "1440x2300",
@@ -41,9 +44,7 @@ const Account = () => {
         user_id: "asd123",
         date: Date.now(),
       };
-      // http://localhost:5001/bugger-d1c9b/us-central1/addMessage
-      let url =
-        "https://us-central1-bugger-d1c9b.cloudfunctions.net/addMessage";
+      let url = "https://us-central1-bugger-d1c9b.cloudfunctions.net/addReport";
       let response = await fetch(url, {
         method: "POST",
         headers: {
@@ -52,11 +53,13 @@ const Account = () => {
         },
         body: JSON.stringify(data),
       });
+
       const urlResponse = await response.json();
       setdebugUrl(urlResponse);
-      console.log("🚀: handleClick -> urlResponse", urlResponse);
-      console.log(debugUrl.bugreport);
+      window.location.href = `mailto:support@hampe.app?subject=Bugreport:%20${minifiedDate}&body=Here%20is%20your%20URL:%20${urlResponse.url}`;
+      setIsLoading(false);
     } catch (err) {
+      setIsLoading(false);
       console.error(err);
     }
   }
@@ -73,17 +76,23 @@ const Account = () => {
           <p>this api key has been used: 13 times.</p>
           <h1>Account Page</h1>
           <h2>This account belongs to {authUser.email}</h2>
-
           <Button onClick={handleClick}>
-            <p>This is a demo button</p>
+            <div>
+              {isLoading ? (
+                <span>
+                  <Spinner />
+                </span>
+              ) : (
+                "Submit bug report"
+              )}
+            </div>
           </Button>
-          {/* TODO: Make this dynamic for  */}
-          <a
-            href={`mailto:support@hampe.app?subject=Bugreport: ${minifiedDate}&body=Here is your URL: ${debugUrl.bugreport}`}>
-            email
-          </a>
 
-          <div>Här vill jag rendera urlResponse: {debugUrl.bugreport}</div>
+          <div>
+            <p>
+              <a href={debugUrl.url}>{debugUrl.url}</a>{" "}
+            </p>
+          </div>
         </div>
       )}
     </AuthUserContext.Consumer>
