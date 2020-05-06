@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { AuthUserContext, withAuthorization } from "../Session/";
 import styled from "styled-components";
 import Button from "../Styles/Button";
@@ -23,50 +23,72 @@ const Code = styled.code`
   border-radius: 5px;
 `;
 
+const Account = () => {
+  const [{ ...debugUrl }, setdebugUrl] = useState("");
 
+  async function handleClick() {
+    try {
+      const data = {
+        resolution: "1440x2300",
+        dpi: "420",
+        connectivity: "eth0",
+        device_id: "123asd",
+        app_version: "1.0.2",
+        app_build: "2.3.1",
+        device_locale: "eng",
+        device_time: Date.now(),
+        has_permission_to_gps: "yes",
+        user_id: "asd123",
+        date: Date.now(),
+      };
+      // http://localhost:5001/bugger-d1c9b/us-central1/addMessage
+      let url =
+        "https://us-central1-bugger-d1c9b.cloudfunctions.net/addMessage";
+      let response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const urlResponse = await response.json();
+      setdebugUrl(urlResponse);
+      console.log("🚀: handleClick -> urlResponse", urlResponse);
+      console.log(debugUrl.bugreport);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+  let date = new Date(Date.now());
+  let minifiedDate = date.toLocaleString("sv-SE");
 
-const handleClick = () => {
-  const data = {
-    manufacturer: "Apple",
-    model: "iPhone 11 XLS PRO",
-    os: "iOS",
-    osVersion: "13.3.7",
-  };
-  console.log("🚀: handleClick -> data", data);
-  // http://localhost:5001/bugger-d1c9b/us-central1/addMessage
-  fetch("http://localhost:5001/bugger-d1c9b/us-central1/addMessage", {
-    method: "POST", // or 'PUT'
-    headers: {
-      "Access-Control-Allow-Origin": "http://localhost:3000",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  })
-    .then((data) => {
-      console.log("Success:", data);
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
+  return (
+    <AuthUserContext.Consumer>
+      {(authUser) => (
+        <div>
+          <ApiKey>
+            <Code>{authUser.uid}</Code>
+          </ApiKey>
+          <p>this api key has been used: 13 times.</p>
+          <h1>Account Page</h1>
+          <h2>This account belongs to {authUser.email}</h2>
+
+          <Button onClick={handleClick}>
+            <p>This is a demo button</p>
+          </Button>
+          {/* TODO: Make this dynamic for  */}
+          <a
+            href={`mailto:support@hampe.app?subject=Bugreport: ${minifiedDate}&body=Here is your URL: ${debugUrl.bugreport}`}>
+            email
+          </a>
+
+          <div>Här vill jag rendera urlResponse: {debugUrl.bugreport}</div>
+        </div>
+      )}
+    </AuthUserContext.Consumer>
+  );
 };
-
-const Account = () => (
-  <AuthUserContext.Consumer>
-    {(authUser) => (
-      <div>
-        <ApiKey>
-          <Code>{authUser.uid}</Code>
-        </ApiKey>
-        <h1>Account Page</h1>
-        <h2>This account belongs to {authUser.email}</h2>
-
-        <Button onClick={handleClick}>
-          <p>This is a demo button</p>
-        </Button>
-      </div>
-    )}
-  </AuthUserContext.Consumer>
-);
 
 const condition = (authUser) => !!authUser;
 
