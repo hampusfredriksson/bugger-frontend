@@ -87,12 +87,9 @@ const Account = () => {
               )}
             </div>
           </Button>
-
-          <div>
-            <p>
+            <Code>
               <a href={debugUrl.url}>{debugUrl.url}</a>{" "}
-            </p>
-          </div>
+            </Code>
         </div>
       )}
     </AuthUserContext.Consumer>
