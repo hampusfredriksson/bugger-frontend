@@ -8,8 +8,8 @@ const Button = styled.button`
   color: ${(props) => (props.primary ? "vilolet" : "palevioletred")};
   border: 2px solid palevioletred;
   margin: 0 1em;
-  height: 4em;
-  width: 10em;
+  height: 2em;
+  width: 5em;
   padding: 0.25 1em;
   transition: 0.3s all ease-out;
   outline: none;
