@@ -2,13 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { AuthUserContext } from "../Session";
+import Button from "../Styles/Button";
 
 import * as ROUTES from "../../constants/routes";
-import SignOutButton from "../SignOut";
 
-const UnorderedList = styled.ul`
-  list-style: none;
-`;
+const NavigationButtons = styled.div`
+`
 
 const Navigation = () => (
   <div>
@@ -19,31 +18,29 @@ const Navigation = () => (
 );
 
 const NavigationAuth = () => (
-  <UnorderedList>
-    <li>
+  <div>
+    <Button>
       <Link to={ROUTES.LANDING}>Landing</Link>
-    </li>
-    <li>
+    </Button>
+    <Button>
       <Link to={ROUTES.HOME}>Home</Link>
-    </li>
-    <li>
+    </Button>
+    <Button>
       <Link to={ROUTES.ACCOUNT}>Account</Link>
-    </li>
-    <li>
-      <SignOutButton />
-    </li>
-  </UnorderedList>
+    </Button>
+  </div>
 );
 
 const NavigationNonAuth = () => (
-  <UnorderedList>
-    <li>
+  <div>
+    <Button>
       <Link to={ROUTES.SIGN_IN}>Sign In</Link>
-    </li>
-    <li>
+    </Button>
+    <Button>
+
       <Link to={ROUTES.LANDING}>Landing</Link>
-    </li>
-  </UnorderedList>
+    </Button>
+  </div>
 );
 
 export default Navigation;
