@@ -2,22 +2,39 @@ import styled from "styled-components";
 
 const Button = styled.button`
   cursor: pointer;
-  background: transparent;
-  font-size: 16px;
-  border-radius: 3px;
-  color: ${(props) => (props.primary ? "vilolet" : "palevioletred")};
-  border: 2px solid palevioletred;
-  margin: 0 1em;
-  height: 2em;
-  width: 5em;
-  padding: 0.25 1em;
-  transition: 0.3s all ease-out;
-  outline: none;
-
-  &:hover {
-    background-color: ${(props) =>
-      props.primary ? "violet" : "palevioletred"};
-    color: white;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 14px;
+  height: 50px;
+  color: black;
+  border-style: none;
+  
+  text-transform: uppercase;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-right: 20px;
+  overflow-x: hidden;
+  position: relative;
+  transition: 0.25s ease all;
+  background: rgb(248, 229, 229);
+  text-decoration: none;
+  line-height: 45px;
+  &::after {
+    content: " ";
+    position: absolute;
+    display: block;
+    bottom: 0;
+    left: -100%;
+    height: 5px;
+    width: 100%;
+    background: whitesmoke;
+    transition: 0.4s ease all;
+  }
+  &:hover::after {
+    left: 0;
+  }
+  &:focus {
+    outline: none;
   }
 `;
 
