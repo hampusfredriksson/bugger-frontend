@@ -1,13 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 import { AuthUserContext } from "../Session";
 import Button from "../Styles/Button";
 
 import * as ROUTES from "../../constants/routes";
 
-const NavigationButtons = styled.div`
-`
 
 const Navigation = () => (
   <div>
