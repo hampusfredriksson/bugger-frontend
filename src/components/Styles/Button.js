@@ -16,7 +16,7 @@ const Button = styled.button`
   overflow-x: hidden;
   position: relative;
   transition: 0.25s ease all;
-  background: rgb(248, 229, 229);
+  background: transparent;
   text-decoration: none;
   line-height: 45px;
   &::after {
@@ -27,7 +27,7 @@ const Button = styled.button`
     left: -100%;
     height: 5px;
     width: 100%;
-    background: whitesmoke;
+    background: #8D8D8D;
     transition: 0.4s ease all;
   }
   &:hover::after {
