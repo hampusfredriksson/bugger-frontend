@@ -17,13 +17,12 @@ code {
   -moz-osx-font-smoothing: grayscale;
 }
 
-a:link {
+a:link, a:visited {
   color: black;
   text-decoration: none;
 }
 
 .tg {
-  
   border-collapse: collapse;
   border-spacing: 0;
   border-color: #000000;
