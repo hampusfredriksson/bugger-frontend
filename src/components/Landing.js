@@ -60,7 +60,7 @@ const Landing = () => {
               <Button>Get started</Button>
             </Link>
             <Link to="/home">
-              <Button>Sneek peek</Button>
+              <Button>Sneak peek</Button>
             </Link>
           </GetStarted>
           {/* <Blob src={blobShape} alt="" /> */}
