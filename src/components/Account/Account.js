@@ -56,7 +56,7 @@ const Account = () => {
 
       const urlResponse = await response.json();
       setdebugUrl(urlResponse);
-      window.location.href = `mailto:support@hampe.app?subject=Bugreport:%20${minifiedDate}&body=Here%20is%20your%20URL:%20${urlResponse.url}`;
+      window.location.href = `mailto:support@hampus.app?subject=Bugreport:%20${minifiedDate}&body=Here%20is%20your%20URL:%20${urlResponse.url}`;
       setIsLoading(false);
     } catch (err) {
       setIsLoading(false);
