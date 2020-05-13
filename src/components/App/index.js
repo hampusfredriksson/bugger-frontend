@@ -8,7 +8,6 @@ import SignInPage from "../SignIn/SignIn";
 import SignUpPage from "../SignUp/SignUp";
 import PasswordForgetPage from "../PasswordForget/PasswordForget";
 import HomePage from "../Home/Home";
-import ItemList from "../itemlist";
 import AccountPage from "../Account/Account";
 import AdminPage from "../Admin/Admin";
 
@@ -50,7 +49,6 @@ const App = () => (
             component={PasswordForgetPage}
           />
           <Route exact path={`${ROUTES.HOME}/:id`} component={HomePage} />
-          <Route exact path="/itemlist" component={ItemList} />
           <Route exact path={ROUTES.ACCOUNT} component={AccountPage} />
           <Route exact path={ROUTES.ADMIN} component={AdminPage} />
         </Switch>
