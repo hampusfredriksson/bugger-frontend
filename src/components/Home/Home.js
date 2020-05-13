@@ -10,23 +10,79 @@ import BugDetail from "../BugDetail";
 
 const Container = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-column-gap: 10px;
-  grid-row-gap: 10px;
-  border-radius: 3px;
+  grid-template-columns: 200px 1fr 200px;
+  grid-template-rows: auto 1fr auto;
+  height: 100vh;
+  grid-gap: 1em;
+  text-align: center;
+  align-items: center;
   justify-items: center;
 `;
 
+const Content = styled.div`
+  background: #eaeaea;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Aside = styled.div`
+  background: #eaeaea;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Header = styled.div``;
+
 const Item = styled.div`
-  width: 50%;
-  margin-bottom: 2%;
-  border-radius: 10px;
+  margin-bottom: 1%;
+  text-transform: uppercase;
+  padding: 1.5rem;
+  border-radius: 1rem;
   background-color: #a1cbfa;
   box-shadow: 0 2px 2px rgba(0, 90, 250, 0.05), 0 4px 4px rgba(0, 90, 250, 0.05),
     0 8px 8px rgba(0, 90, 250, 0.05), 0 16px 16px rgba(0, 90, 250, 0.05);
   color: #fff;
-  padding: 15px;
   box-sizing: border-box;
+
+  @media (max-width: 768px) {
+    flex-basis: 34%;
+  }
+
+  @media (max-width: 320px) {
+    flex-basis: 51%;
+  }
+`;
+
+const Sidenav = styled.div`
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+  top: 20px;
+  left: 10px;
+  background: #eee;
+  overflow-x: hidden;
+  padding: 8px 0;
+
+  &:hover {
+    color: #064579;
+  }
+
+  @media screen and (max-height: 450px) {
+    padding-top: 15px;
+  }
+`;
+
+const StyledLink = styled.a`
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #2196f3;
+  display: block;
+  @media screen and (max-height: 450px) {
+    font-size: 18px;
+  }
 `;
 
 const Home = ({ match }) => {
@@ -51,15 +107,15 @@ const Home = ({ match }) => {
   }, [match]);
   return (
     <>
-      <h1>Bug Details</h1>
       {report && (
         <Container>
+          <Aside>Left Sidebar</Aside>
           <Item>
-            <FaCode size={32} />
+            <FaCode size={30} />
             <BugDetail title="App version" value={report.app_version} />
           </Item>
           <Item>
-            <FaRegBuilding size={32} />
+            <FaRegBuilding size={30} />
             <BugDetail title="App build" value={report.app_build} />
           </Item>
           <Item>
@@ -77,14 +133,83 @@ const Home = ({ match }) => {
           <Item>
             <BugDetail
               title="Permission to gps"
-              value={report.has_permission_to_gps}
+              value={String(report.has_permission_to_gps)}
             />
           </Item>
+          <Header>
+            <h3>Device Info</h3>
+          </Header>
           <Item>
             <BugDetail title="Device Resolution" value={report.resolution} />
           </Item>
           <Item>
             <BugDetail title="User ID" value={report.user_id} />
+          </Item>
+          <Item>
+            <BugDetail title="OS" value={report.os} />
+          </Item>
+          <Item>
+            <BugDetail title="OS Version" value={report.os_version} />
+          </Item>
+          <Item>
+            <BugDetail title="Battery Level" value={report.battery_level} />
+          </Item>
+          <Header>
+            <h3>User Info</h3>
+          </Header>
+          <Item>
+            <BugDetail title="Name" value={report.device_name} />
+          </Item>
+          <Item>
+            <BugDetail
+              title="Available Storage"
+              value={report.device_available_storage}
+            />
+          </Item>
+          <Item>
+            <BugDetail
+              title="Flight mode"
+              value={String(report.device_flight_mode)}
+            />
+          </Item>
+          <Item>
+            <BugDetail
+              title="Bluetooth"
+              value={String(report.device_bluetooth)}
+            />
+          </Item>
+          <Item>
+            <BugDetail
+              title="Display orientation"
+              value={report.device_orientation}
+            />
+          </Item>
+          <Item>
+            <BugDetail
+              title="Wifi Signal"
+              value={report.device_wifi_signal_strength}
+            />
+          </Item>
+          <Item>
+            <BugDetail
+              title="Available ram"
+              value={report.device_available_ram}
+            />
+          </Item>
+          <Item>
+            <BugDetail title="Processor" value={report.device_processor} />
+          </Item>
+          <Item>
+            <BugDetail
+              title="Build number"
+              value={report.device_build_number}
+            />
+          </Item>
+          <Item>
+            <BugDetail title="Sim card" value={report.device_sim} />
+          </Item>
+          <Item>
+            <BugDetail title="IP Address" value={report.device_ip_address} />
           </Item>
 
           {/* <ReportScreen>
@@ -117,6 +242,7 @@ const Home = ({ match }) => {
           </div>
         )}
       </ReportScreen> */}
+          <Aside>Right Sidebar</Aside>
         </Container>
       )}
     </>
