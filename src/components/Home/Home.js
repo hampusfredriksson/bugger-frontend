@@ -1,88 +1,93 @@
 import React, { useState, useEffect } from "react";
-// import withAuthorization from "../Session/withAuthorization";
+import withAuthorization from "../Session/withAuthorization";
 import { db } from "../Firebase/firebase";
 import Button from "../Styles/Button";
 import Spinner from "../Styles/Spinner";
 import styled from "styled-components";
 import { FaCode } from "react-icons/fa";
-import { FaRegBuilding } from "react-icons/fa";
+import { FaCogs } from "react-icons/fa";
+import { BsTrash } from "react-icons/bs";
+import { BsWifi } from "react-icons/bs";
+import { MdDevices } from "react-icons/md";
+import { GoGlobe } from "react-icons/go";
+import { GoPrimitiveDot } from "react-icons/go";
+import { MdGpsFixed } from "react-icons/md";
+import { BsDisplay } from "react-icons/bs";
+import { FiUser } from "react-icons/fi";
+import { FaCog } from "react-icons/fa";
+import { FiCode } from "react-icons/fi";
+import { BsBatteryHalf } from "react-icons/bs";
+import { MdSmartphone } from "react-icons/md";
+import { MdFlight } from "react-icons/md";
+import { MdStorage } from "react-icons/md";
+import { FiBluetooth } from "react-icons/fi";
+import { FiWifi } from "react-icons/fi";
+import { FiCpu } from "react-icons/fi";
+import { MdMemory } from "react-icons/md";
+import { BsPhoneLandscape } from "react-icons/bs";
+import { MdBuild } from "react-icons/md";
+import { MdSimCard } from "react-icons/md";
+import { FaReact } from "react-icons/fa";
 import BugDetail from "../BugDetail";
 
-const Container = styled.div`
-  display: grid;
-  grid-template-columns: 200px 1fr 200px;
-  grid-template-rows: auto 1fr auto;
-  height: 100vh;
-  grid-gap: 1em;
-  text-align: center;
-  align-items: center;
-  justify-items: center;
+const TestContainer = styled.div`
+  max-width: 960px;
+  padding: 8%;
+  margin: auto;
+  font-family: "FiraCode-Retina";
 `;
 
-const Content = styled.div`
-  background: #eaeaea;
+const Header = styled.div`
+  width: fit-content;
+  background: #e8e8e8;
+`;
+
+const SubHeader = styled.div`
   display: flex;
-  align-items: center;
   justify-content: center;
 `;
 
-const Aside = styled.div`
-  background: #eaeaea;
+const FlexGrid = styled.div`
+  color: black;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  margin: auto -1rem 1rem;
 `;
 
-const Header = styled.div``;
+const TestSection = styled.section`
+  background-color: #e8e8e8;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  padding: 1rem;
+  flex: 4;
+`;
+
+const MainContent = styled.section`
+  display: flex;
+`;
+
+const Icon = styled.div`
+  width: 25%;
+  width: fit-content;
+  margin-right: 10px;
+`;
+
+const Sidebar = styled.aside`
+  border: solid 1px #e8e8e8;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  padding: 1rem;
+  flex: 1;
+`;
 
 const Item = styled.div`
-  margin-bottom: 1%;
-  text-transform: uppercase;
-  padding: 1.5rem;
-  border-radius: 1rem;
-  background-color: #a1cbfa;
-  box-shadow: 0 2px 2px rgba(0, 90, 250, 0.05), 0 4px 4px rgba(0, 90, 250, 0.05),
-    0 8px 8px rgba(0, 90, 250, 0.05), 0 16px 16px rgba(0, 90, 250, 0.05);
-  color: #fff;
-  box-sizing: border-box;
-
-  @media (max-width: 768px) {
-    flex-basis: 34%;
-  }
-
-  @media (max-width: 320px) {
-    flex-basis: 51%;
-  }
-`;
-
-const Sidenav = styled.div`
   display: flex;
-  flex-direction: column;
-  z-index: 1;
-  top: 20px;
-  left: 10px;
-  background: #eee;
-  overflow-x: hidden;
-  padding: 8px 0;
-
-  &:hover {
-    color: #064579;
-  }
-
-  @media screen and (max-height: 450px) {
-    padding-top: 15px;
-  }
-`;
-
-const StyledLink = styled.a`
-  padding: 6px 8px 6px 16px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #2196f3;
-  display: block;
-  @media screen and (max-height: 450px) {
-    font-size: 18px;
-  }
+  justify-content: center;
+  flex-direction: row;
+  width: 50%;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  text-align: left;
+  text-transform: uppercase;
 `;
 
 const Home = ({ match }) => {
@@ -105,164 +110,250 @@ const Home = ({ match }) => {
         console.log(error);
       });
   }, [match]);
+
   return (
     <>
       {report && (
-        <Container>
-          <Aside>Left Sidebar</Aside>
-          <Item>
-            <FaCode size={30} />
-            <BugDetail title="App version" value={report.app_version} />
-          </Item>
-          <Item>
-            <FaRegBuilding size={30} />
-            <BugDetail title="App build" value={report.app_build} />
-          </Item>
-          <Item>
-            <BugDetail title="Connectivity" value={report.connectivity} />
-          </Item>
-          <Item>
-            <BugDetail title="Device ID" value={report.device_id} />
-          </Item>
-          <Item>
-            <BugDetail title="Device locale" value={report.device_locale} />
-          </Item>
-          <Item>
-            <BugDetail title="Dpi" value={report.dpi} />
-          </Item>
-          <Item>
-            <BugDetail
-              title="Permission to gps"
-              value={String(report.has_permission_to_gps)}
-            />
-          </Item>
+        <TestContainer>
           <Header>
-            <h3>Device Info</h3>
+            <h1>Bug report</h1>
           </Header>
-          <Item>
-            <BugDetail title="Device Resolution" value={report.resolution} />
-          </Item>
-          <Item>
-            <BugDetail title="User ID" value={report.user_id} />
-          </Item>
-          <Item>
-            <BugDetail title="OS" value={report.os} />
-          </Item>
-          <Item>
-            <BugDetail title="OS Version" value={report.os_version} />
-          </Item>
-          <Item>
-            <BugDetail title="Battery Level" value={report.battery_level} />
-          </Item>
-          <Header>
-            <h3>User Info</h3>
-          </Header>
-          <Item>
-            <BugDetail title="Name" value={report.device_name} />
-          </Item>
-          <Item>
-            <BugDetail
-              title="Available Storage"
-              value={report.device_available_storage}
-            />
-          </Item>
-          <Item>
-            <BugDetail
-              title="Flight mode"
-              value={String(report.device_flight_mode)}
-            />
-          </Item>
-          <Item>
-            <BugDetail
-              title="Bluetooth"
-              value={String(report.device_bluetooth)}
-            />
-          </Item>
-          <Item>
-            <BugDetail
-              title="Display orientation"
-              value={report.device_orientation}
-            />
-          </Item>
-          <Item>
-            <BugDetail
-              title="Wifi Signal"
-              value={report.device_wifi_signal_strength}
-            />
-          </Item>
-          <Item>
-            <BugDetail
-              title="Available ram"
-              value={report.device_available_ram}
-            />
-          </Item>
-          <Item>
-            <BugDetail title="Processor" value={report.device_processor} />
-          </Item>
-          <Item>
-            <BugDetail
-              title="Build number"
-              value={report.device_build_number}
-            />
-          </Item>
-          <Item>
-            <BugDetail title="Sim card" value={report.device_sim} />
-          </Item>
-          <Item>
-            <BugDetail title="IP Address" value={report.device_ip_address} />
-          </Item>
+          <FlexGrid>
+            <TestSection>
+              <SubHeader>
+                <h2>App info</h2>
+              </SubHeader>
+              <hr />
+              <MainContent>
+                <Item>
+                  <Icon>
+                    <FaCode size={30} />
+                  </Icon>
+                  <BugDetail title="App version" value={report.app_version} />
+                </Item>
+                <Item>
+                  <Icon>
+                    <FaCogs size={30} />
+                  </Icon>
+                  <BugDetail title="App build" value={report.app_build} />
+                </Item>
+              </MainContent>
+              <MainContent>
+                <Item>
+                  <Icon>
+                    <BsWifi size={30} />
+                  </Icon>
+                  <BugDetail title="Connectivity" value={report.connectivity} />
+                </Item>
+                <Item>
+                  <Icon>
+                    <MdDevices size={30} />
+                  </Icon>
+                  <BugDetail title="Device ID" value={report.device_id} />
+                </Item>
+              </MainContent>
+              <MainContent>
+                <Item>
+                  <Icon>
+                    <GoGlobe size={30} />
+                  </Icon>
+                  <BugDetail
+                    title="Device locale"
+                    value={report.device_locale}
+                  />
+                </Item>
+                <Item>
+                  <Icon>
+                    <GoPrimitiveDot size={30} />
+                  </Icon>
+                  <BugDetail title="Dots per inch" value={report.dpi} />
+                </Item>
+              </MainContent>
+              <SubHeader>
+                <h2>Device info</h2>
+              </SubHeader>
+              <hr />
+              <MainContent>
+                <Item>
+                  <Icon>
+                    <MdGpsFixed size={30} />
+                  </Icon>
+                  <BugDetail
+                    title="Permission to gps"
+                    value={String(report.has_permission_to_gps)}
+                  />
+                </Item>
 
-          {/* <ReportScreen>
-       {isLoading ? (
-         <span>
-           <Spinner />
-         </span>
-       ) : (
-         ""
-       )}
-        <h1>Bug Details</h1>
-        {report && (
-          <div>
-            <ReportInfo>
-              <Icons>
-                <FaCode size={42} />
-              </Icons>
-              <h2>App version</h2>
-
-              <span>{report.app_version}</span>
-
-              <Icons>
-                <FaRegBuilding size={42} />
-              </Icons>
+                <Item>
+                  <Icon>
+                    <BsDisplay size={30} />
+                  </Icon>
+                  <BugDetail
+                    title="Device Resolution"
+                    value={report.resolution}
+                  />
+                </Item>
+              </MainContent>
+              <MainContent>
+                <Item>
+                  <Icon>
+                    <FiUser size={30} />
+                  </Icon>
+                  <BugDetail title="User ID" value={report.user_id} />
+                </Item>
+                <Item>
+                  <Icon>
+                    <FaCog size={30} />
+                  </Icon>
+                  <BugDetail title="operating system" value={report.os} />
+                </Item>
+              </MainContent>
+              <MainContent>
+                <Item>
+                  <Icon>
+                    <FiCode size={30} />
+                  </Icon>
+                  <BugDetail title="OS Version" value={report.os_version} />
+                </Item>
+                <Item>
+                  <Icon>
+                    <BsBatteryHalf size={30} />
+                  </Icon>
+                  <BugDetail
+                    title="Battery Level"
+                    value={report.battery_level}
+                  />
+                </Item>
+              </MainContent>
+              <MainContent>
+                <Item>
+                  <Icon>
+                    <MdSmartphone size={30} />
+                  </Icon>
+                  <BugDetail title="Name" value={report.device_name} />
+                </Item>
+                <Item>
+                  <Icon>
+                    <MdStorage size={30} />
+                  </Icon>
+                  <BugDetail
+                    title="Available Storage"
+                    value={report.device_available_storage}
+                  />
+                </Item>
+              </MainContent>
+              <MainContent>
+                <Item>
+                  <Icon>
+                    <MdFlight size={30} />
+                  </Icon>
+                  <BugDetail
+                    title="Flight mode"
+                    value={String(report.device_flight_mode)}
+                  />
+                </Item>
+                <Item>
+                  <Icon>
+                    <FiBluetooth size={30} />
+                  </Icon>
+                  <BugDetail
+                    title="Bluetooth"
+                    value={String(report.device_bluetooth)}
+                  />
+                </Item>
+              </MainContent>
+              <SubHeader>
+                <h2>User Info</h2>
+              </SubHeader>
+              <hr />
+              <MainContent>
+                <Item>
+                  <Icon>
+                    <BsPhoneLandscape size={30} />
+                  </Icon>
+                  <BugDetail
+                    title="Display orientation"
+                    value={report.device_orientation}
+                  />
+                </Item>
+                <Item>
+                  <Icon>
+                    <FiWifi size={30} />
+                  </Icon>
+                  <BugDetail
+                    title="Wifi Signal"
+                    value={report.device_wifi_signal_strength}
+                  />
+                </Item>
+              </MainContent>
+              <MainContent>
+                <Item>
+                  <Icon>
+                    <MdMemory size={30} />
+                  </Icon>
+                  <BugDetail
+                    title="Available ram"
+                    value={report.device_available_ram}
+                  />
+                </Item>
+                <Item>
+                  <Icon>
+                    <FiCpu size={30} />
+                  </Icon>
+                  <BugDetail
+                    title="Processor"
+                    value={report.device_processor}
+                  />
+                </Item>
+              </MainContent>
+              <MainContent>
+                <Item>
+                  <Icon>
+                    <MdBuild size={30} />
+                  </Icon>
+                  <BugDetail
+                    title="Build number"
+                    value={report.device_build_number}
+                  />
+                </Item>
+                <Item>
+                  <Icon>
+                    <MdSimCard size={30} />
+                  </Icon>
+                  <BugDetail title="Sim card" value={report.device_sim} />
+                </Item>
+              </MainContent>
+              <MainContent>
+                <Item>
+                  <Icon>
+                    <FaReact size={30} />
+                  </Icon>
+                  <BugDetail
+                    title="IP Address"
+                    value={report.device_ip_address}
+                  />
+                </Item>
+              </MainContent>
+            </TestSection>
+            <Sidebar>
               <div>
-                <h2>App build</h2>
+                <h2>
+                  Actions <BsTrash size={20} />
+                </h2>
               </div>
-              <span>{report.app_build}</span>
-            </ReportInfo>
-          </div>
-        )}
-      </ReportScreen> */}
-          <Aside>Right Sidebar</Aside>
-        </Container>
+              <p>Priority</p>
+              <div>
+                <h2>Integrations</h2>
+              </div>
+              <p>Jira</p>
+              <p>Forward</p>
+            </Sidebar>
+          </FlexGrid>
+        </TestContainer>
       )}
     </>
   );
 };
 
-export default Home;
-
-// const condition = (authUser) => authUser != null;
-// export default withAuthorization(condition)(Home);
-
-/* 
-            <Icons>
-              <FaCode size={42} />
-            </Icons>
-            <div>App version</div>
-            <span>{report.app_version}</span>
-            <Icons>
-              <FaRegBuilding size={42} />
-            </Icons>
-            <div>App build</div>
-            <span>{report.app_build}</span>
-*/
+const condition = (authUser) => authUser != null;
+export default withAuthorization(condition)(Home);
