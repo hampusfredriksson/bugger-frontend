@@ -22,58 +22,15 @@ a:link, a:visited {
   text-decoration: none;
 }
 
-.tg {
-  border-collapse: collapse;
-  border-spacing: 0;
-  border-color: #000000;
-}
-.tg td {
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-  padding: 10px 5px;
-  border-style: solid;
-  border-width: 1px;
-  overflow: hidden;
-  word-break: normal;
-  border-color: #000000;
-  color: #333;
-  background-color: #fff;
-}
-.tg th {
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-  font-weight: normal;
-  padding: 10px 5px;
-  border-style: solid;
-  border-width: 1px;
-  overflow: hidden;
-  word-break: normal;
-  border-color: #000000;
-  color: #333;
-  background-color: #f0f0f0;
-}
-.tg .tg-ycr8 {
-  background-color: #ffffff;
-  text-align: left;
-  vertical-align: top;
-}
-.tg .tg-a02x {
-  font-size: 100%;
-  background-color: #ffffff;
-  text-align: left;
-  vertical-align: top;
+.green {
+  background: #2ecc71;
 }
 
-.tg .tg-6hdc {
-  font-size: 100%;
-  background-color: #ffffff;
-  text-align: left;
-  vertical-align: top;
-}
-.tg .tg-i81m {
-  background-color: #ffffff;
-  text-align: center;
-  vertical-align: top;
+.yellow {
+   background: #c0392b;
 }
 
+.red {
+    background: #f1c40f;
+}
 `;
