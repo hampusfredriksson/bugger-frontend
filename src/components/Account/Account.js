@@ -32,17 +32,30 @@ const Account = () => {
     setIsLoading(true);
     try {
       const data = {
-        resolution: "1440x2300",
+        resolution: "1920x1080",
         dpi: "420",
-        connectivity: "eth0",
-        device_id: "123asd",
-        app_version: "1.0.2",
-        app_build: "2.3.1",
-        device_locale: "eng",
-        device_time: Date.now(),
-        has_permission_to_gps: "yes",
-        user_id: "asd123",
-        date: Date.now(),
+        connectivity: "wifi",
+        device_id: "ESv0TnsEbfCs",
+        device_name: "Kalles iPhone",
+        device_available_storage: "128 GB",
+        device_flight_mode: false,
+        device_bluetooth: true,
+        device_orientation: "landscape",
+        device_wifi_signal_strength: "98",
+        device_available_ram: "1286 MB",
+        device_processor: "A13 Bionic",
+        device_build_number: "jkn7QFw6LK02",
+        device_sim: "WDeAoBIB1mja",
+        device_ip_address: "127.0.0.1",
+        device_locale: "sv_SE",
+        device_time: "",
+        app_version: "1.0.3",
+        app_build: "2.1.4",
+        has_permission_to_gps: true,
+        user_id: "Uqbz3",
+        os: "iOS",
+        os_version: "iOS 13.3.7",
+        battery_level: "100%",
       };
       let url = "https://us-central1-bugger-d1c9b.cloudfunctions.net/addReport";
       let response = await fetch(url, {
@@ -87,9 +100,9 @@ const Account = () => {
               )}
             </div>
           </Button>
-            <Code>
-              <a href={debugUrl.url}>{debugUrl.url}</a>{" "}
-            </Code>
+          <Code>
+            <a href={debugUrl.url}>{debugUrl.url}</a>{" "}
+          </Code>
         </div>
       )}
     </AuthUserContext.Consumer>
