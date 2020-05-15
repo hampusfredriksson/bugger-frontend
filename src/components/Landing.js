@@ -56,7 +56,7 @@ const Landing = () => {
           </HeroSubheader>
 
           <GetStarted>
-            <Link to="/signup">
+            <Link to="/signin">
               <Button>Get started</Button>
             </Link>
             <Link to="/home">
