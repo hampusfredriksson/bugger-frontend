@@ -5,9 +5,7 @@ import Button from "../Styles/Button";
 import Spinner from "../Styles/Spinner";
 
 const ApiKey = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 24px;
+
   margin-bottom: 16px;
   font-size: larger;
   font-weight: 600;
@@ -21,6 +19,32 @@ const Code = styled.code`
   font-size: 85%;
   background-color: #b3b3b3;
   border-radius: 5px;
+`;
+
+const TestContainer = styled.div`
+  max-width: 960px;
+  padding: 8%;
+  margin: auto;
+  font-family: "FiraCode-Retina";
+`;
+
+const Header = styled.div`
+  width: fit-content;
+  background: #e8e8e8;
+`;
+
+const FlexGrid = styled.div`
+  color: black;
+  display: flex;
+  margin: auto -1rem 1rem;
+`;
+
+const TestSection = styled.section`
+  background-color: #e8e8e8;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  padding: 1rem;
+  flex: 4;
 `;
 
 const Account = () => {
@@ -82,13 +106,18 @@ const Account = () => {
   return (
     <AuthUserContext.Consumer>
       {(authUser) => (
-        <div>
+         <TestContainer>
+
+         <Header>
+           <h1>Account</h1>
+         </Header>
+         <FlexGrid>
+           <TestSection>
+
           <ApiKey>
             <Code>{authUser.uid}</Code>
           </ApiKey>
-          <p>this api key has been used: 13 times.</p>
-          <h1>Account Page</h1>
-          <h2>This account belongs to {authUser.email}</h2>
+          <h2>Account belongs to {authUser.email}</h2>
           <Button onClick={handleClick}>
             <div>
               {isLoading ? (
@@ -103,7 +132,9 @@ const Account = () => {
           <Code>
             <a href={debugUrl.url}>{debugUrl.url}</a>{" "}
           </Code>
-        </div>
+          </TestSection>
+         </FlexGrid>
+          </TestContainer>
       )}
     </AuthUserContext.Consumer>
   );
