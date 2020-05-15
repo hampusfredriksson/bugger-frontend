@@ -137,7 +137,7 @@ const Home = ({ match }) => {
       {report && (
         <TestContainer>
           <Header>
-            <h1>Bug report</h1>
+      <h1>Bug report {match.params.id}</h1>
           </Header>
           <FlexGrid>
             <TestSection>
