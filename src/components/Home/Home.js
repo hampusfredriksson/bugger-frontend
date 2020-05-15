@@ -389,13 +389,6 @@ const Home = ({ match }) => {
                 <FaGithub size={30} /> Github
               </p>
 
-              <p>Priority</p>
-              <div>
-                <h2>Integrations</h2>
-              </div>
-              <p>Jira</p>
-              <p>Forward</p>
-
             </Sidebar>
           </FlexGrid>
         </TestContainer>
