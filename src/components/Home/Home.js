@@ -4,30 +4,36 @@ import { db } from "../Firebase/firebase";
 import Button from "../Styles/Button";
 import Spinner from "../Styles/Spinner";
 import styled from "styled-components";
-import { FaCode } from "react-icons/fa";
-import { FaCogs } from "react-icons/fa";
-import { BsTrash } from "react-icons/bs";
-import { BsWifi } from "react-icons/bs";
-import { MdDevices } from "react-icons/md";
-import { GoGlobe } from "react-icons/go";
-import { GoPrimitiveDot } from "react-icons/go";
-import { MdGpsFixed } from "react-icons/md";
-import { BsDisplay } from "react-icons/bs";
-import { FiUser } from "react-icons/fi";
-import { FaCog } from "react-icons/fa";
-import { FiCode } from "react-icons/fi";
-import { BsBatteryHalf } from "react-icons/bs";
-import { MdSmartphone } from "react-icons/md";
-import { MdFlight } from "react-icons/md";
-import { MdStorage } from "react-icons/md";
-import { FiBluetooth } from "react-icons/fi";
-import { FiWifi } from "react-icons/fi";
-import { FiCpu } from "react-icons/fi";
-import { MdMemory } from "react-icons/md";
-import { BsPhoneLandscape } from "react-icons/bs";
-import { MdBuild } from "react-icons/md";
-import { MdSimCard } from "react-icons/md";
-import { FaReact } from "react-icons/fa";
+import {
+  FaCode,
+  FaCogs,
+  FaCog,
+  FaReact,
+  FaSlack,
+  FaTrello,
+  FaGithub,
+} from "react-icons/fa";
+import {
+  BsTrash,
+  BsWifi,
+  BsBatteryHalf,
+  BsPhoneLandscape,
+  BsDisplay,
+} from "react-icons/bs";
+import {
+  MdDevices,
+  MdSmartphone,
+  MdFlight,
+  MdStorage,
+  MdMemory,
+  MdBuild,
+  MdSimCard,
+  MdGpsFixed,
+} from "react-icons/md";
+import { GoGlobe, GoPrimitiveDot } from "react-icons/go";
+import { FiUser, FiCode, FiBluetooth, FiWifi, FiCpu } from "react-icons/fi";
+import { DiJira } from "react-icons/di";
+
 import BugDetail from "../BugDetail";
 
 const TestContainer = styled.div`
@@ -77,6 +83,21 @@ const Sidebar = styled.aside`
   margin-right: 0.5rem;
   padding: 1rem;
   flex: 1;
+`;
+
+
+const SidebarContent = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: baseline;
+`;
+
+const Dot = styled.span`
+  height: 15px;
+  width: 15px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
 `;
 
 const Item = styled.div`
@@ -341,12 +362,40 @@ const Home = ({ match }) => {
                   Actions <BsTrash size={20} />
                 </h2>
               </div>
+
+              <SidebarContent>
+                <p>Priority</p>
+                <Dot className="green"></Dot>
+                <Dot className="yellow"></Dot>
+                <Dot className="red"></Dot>
+              </SidebarContent>
+              <div>
+                <h2>Integrations</h2>
+              </div>
+              <p>
+                {" "}
+                <DiJira size={30} /> Jira
+              </p>
+              <p>
+                {" "}
+                <FaSlack size={30} /> Slack
+              </p>
+              <p>
+                {""}
+                <FaTrello size={30} /> Trello
+              </p>
+              <p>
+                {""}
+                <FaGithub size={30} /> Github
+              </p>
+
               <p>Priority</p>
               <div>
                 <h2>Integrations</h2>
               </div>
               <p>Jira</p>
               <p>Forward</p>
+
             </Sidebar>
           </FlexGrid>
         </TestContainer>
