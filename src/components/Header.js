@@ -56,7 +56,7 @@ const Header = () => {
         </NavCenter>
         <NavRight>
         <Navigation />
-          <Link to="/signup">
+          <Link to="/signin">
             <Button>GET STARTED</Button>
           </Link>
         </NavRight>
