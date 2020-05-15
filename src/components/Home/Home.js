@@ -85,6 +85,7 @@ const Sidebar = styled.aside`
   flex: 1;
 `;
 
+
 const SidebarContent = styled.div`
   display: flex;
   justify-content: space-around;
@@ -361,6 +362,7 @@ const Home = ({ match }) => {
                   Actions <BsTrash size={20} />
                 </h2>
               </div>
+
               <SidebarContent>
                 <p>Priority</p>
                 <Dot className="green"></Dot>
@@ -386,6 +388,14 @@ const Home = ({ match }) => {
                 {""}
                 <FaGithub size={30} /> Github
               </p>
+
+              <p>Priority</p>
+              <div>
+                <h2>Integrations</h2>
+              </div>
+              <p>Jira</p>
+              <p>Forward</p>
+
             </Sidebar>
           </FlexGrid>
         </TestContainer>
