@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { AuthUserContext } from "../Session";
+import SIGN_OUT from "../SignOut";
 import Button from "../Styles/Button";
 
 import * as ROUTES from "../../constants/routes";
-
 
 const Navigation = () => (
   <div>
@@ -15,29 +15,26 @@ const Navigation = () => (
 );
 
 const NavigationAuth = () => (
-  <div>
-    <Button>
-      <Link to={ROUTES.LANDING}>Landing</Link>
-    </Button>
+  <>
     <Button>
       <Link to={ROUTES.HOME}>Home</Link>
     </Button>
     <Button>
       <Link to={ROUTES.ACCOUNT}>Account</Link>
     </Button>
-  </div>
+    <SIGN_OUT />
+  </>
 );
 
 const NavigationNonAuth = () => (
-  <div>
+  <>
     <Button>
-      <Link to={ROUTES.SIGN_IN}>Sign In</Link>
-    </Button>
-    <Button>
-
       <Link to={ROUTES.LANDING}>Landing</Link>
     </Button>
-  </div>
+    <Button>
+      <Link to={ROUTES.SIGN_IN}>get started</Link>
+    </Button>
+  </>
 );
 
 export default Navigation;
