@@ -21,9 +21,10 @@ const Code = styled.code`
   border-radius: 5px;
 `;
 
-const TestContainer = styled.div`
+const Container = styled.div`
   max-width: 960px;
   padding: 8%;
+  height: auto;
   margin: auto;
   font-family: "FiraCode-Retina";
 `;
@@ -39,7 +40,7 @@ const FlexGrid = styled.div`
   margin: auto -1rem 1rem;
 `;
 
-const TestSection = styled.section`
+const Section = styled.section`
   background-color: #e8e8e8;
   margin-left: 0.5rem;
   margin-right: 0.5rem;
@@ -106,13 +107,13 @@ const Account = () => {
   return (
     <AuthUserContext.Consumer>
       {(authUser) => (
-         <TestContainer>
+         <Container>
 
          <Header>
            <h1>Account</h1>
          </Header>
          <FlexGrid>
-           <TestSection>
+           <Section>
 
           <ApiKey>
             <Code>{authUser.uid}</Code>
@@ -132,9 +133,10 @@ const Account = () => {
           <Code>
             <a href={debugUrl.url}>{debugUrl.url}</a>{" "}
           </Code>
-          </TestSection>
+          </Section>
          </FlexGrid>
-          </TestContainer>
+         <h3>Here, I don't know yet.</h3>
+          </Container>
       )}
     </AuthUserContext.Consumer>
   );
