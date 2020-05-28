@@ -8,7 +8,6 @@ const Button = styled.button`
   height: 50px;
   color: black;
   border-style: none;
-  
   text-transform: uppercase;
   padding-left: 20px;
   padding-right: 20px;
@@ -27,7 +26,7 @@ const Button = styled.button`
     left: -100%;
     height: 5px;
     width: 100%;
-    background: #8D8D8D;
+    background: #8d8d8d;
     transition: 0.4s ease all;
   }
   &:hover::after {

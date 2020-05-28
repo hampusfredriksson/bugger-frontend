@@ -36,7 +36,7 @@ import { DiJira } from "react-icons/di";
 
 import BugDetail from "../BugDetail";
 
-const TestContainer = styled.div`
+const Container = styled.div`
   max-width: 960px;
   padding: 8%;
   margin: auto;
@@ -53,7 +53,7 @@ const SubHeader = styled.div`
   justify-content: center;
 `;
 
-const FlexGrid = styled.div`
+const Wrapper = styled.div`
   color: black;
   display: flex;
   margin: auto -1rem 1rem;
@@ -84,7 +84,6 @@ const Sidebar = styled.aside`
   padding: 1rem;
   flex: 1;
 `;
-
 
 const SidebarContent = styled.div`
   display: flex;
@@ -135,11 +134,11 @@ const Home = ({ match }) => {
   return (
     <>
       {report && (
-        <TestContainer>
+        <Container>
           <Header>
-      <h1>Bug report {match.params.id}</h1>
+            <h1>Bug report {match.params.id}</h1>
           </Header>
-          <FlexGrid>
+          <Wrapper>
             <TestSection>
               <SubHeader>
                 <h2>App info</h2>
@@ -365,9 +364,9 @@ const Home = ({ match }) => {
 
               <SidebarContent>
                 <p>Priority</p>
-                <Dot className="green"></Dot>
-                <Dot className="yellow"></Dot>
                 <Dot className="red"></Dot>
+                <Dot className="yellow"></Dot>
+                <Dot className="green"></Dot>
               </SidebarContent>
               <div>
                 <h2>Integrations</h2>
@@ -388,10 +387,9 @@ const Home = ({ match }) => {
                 {""}
                 <FaGithub size={30} /> Github
               </p>
-
             </Sidebar>
-          </FlexGrid>
-        </TestContainer>
+          </Wrapper>
+        </Container>
       )}
     </>
   );
