@@ -10,6 +10,7 @@ import PasswordForgetPage from "../PasswordForget/PasswordForget";
 import HomePage from "../Home/Home";
 import AccountPage from "../Account/Account";
 import AdminPage from "../Admin/Admin";
+import Footer from "../Footer";
 
 import * as ROUTES from "../../constants/routes";
 import { withAuthentication } from "../Session";
@@ -52,6 +53,7 @@ const App = () => (
           <Route exact path={ROUTES.ACCOUNT} component={AccountPage} />
           <Route exact path={ROUTES.ADMIN} component={AdminPage} />
         </Switch>
+        <Footer />
       </BrowserRouter>
     </AppWrapper>
   </>
