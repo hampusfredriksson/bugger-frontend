@@ -59,7 +59,7 @@ const Wrapper = styled.div`
   margin: auto -1rem 1rem;
 `;
 
-const TestSection = styled.section`
+const Section = styled.section`
   background-color: #e8e8e8;
   margin-left: 0.5rem;
   margin-right: 0.5rem;
@@ -139,7 +139,7 @@ const Home = ({ match }) => {
             <h1>Bug report {match.params.id}</h1>
           </Header>
           <Wrapper>
-            <TestSection>
+            <Section>
               <SubHeader>
                 <h2>App info</h2>
               </SubHeader>
@@ -354,7 +354,7 @@ const Home = ({ match }) => {
                   />
                 </Item>
               </MainContent>
-            </TestSection>
+            </Section>
             <Sidebar>
               <div>
                 <h2>
