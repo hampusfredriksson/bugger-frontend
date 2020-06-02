@@ -14,7 +14,8 @@ import {
   FaGithub,
 } from "react-icons/fa";
 import {
-  BsTrash,
+  BsCheck,
+  BsArrowClockwise,
   BsWifi,
   BsBatteryHalf,
   BsPhoneLandscape,
@@ -35,6 +36,7 @@ import { FiUser, FiCode, FiBluetooth, FiWifi, FiCpu } from "react-icons/fi";
 import { DiJira } from "react-icons/di";
 
 import BugDetail from "../BugDetail";
+import ReactJson from "react-json-view";
 
 const Container = styled.div`
   max-width: 960px;
@@ -87,11 +89,22 @@ const Sidebar = styled.aside`
 
 const SidebarContent = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: start;
   align-items: baseline;
 `;
 
-const Dot = styled.span`
+const H2 = styled.h2`
+  margin-bottom: 0;
+`;
+
+const Actions = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+`;
+
+const Dot = styled.div`
+  margin-right: 10px;
   height: 15px;
   width: 15px;
   background-color: #bbb;
@@ -112,28 +125,135 @@ const Item = styled.div`
 
 const Home = ({ match }) => {
   const [report, setReport] = useState(null);
+  const [fetchFailed, setFetchFailed] = useState(false);
+  const [priority, setPriority] = useState("");
 
-  const [isLoading, setIsLoading] = useState(false);
+  // TODO Fix loading screen on Home position
 
   useEffect(() => {
-    setIsLoading(true);
     let docRef = db.collection("reports").doc(match.params.id);
 
     docRef
       .get()
       .then((doc) => {
-        console.log(doc.data());
-        setReport(doc.data());
-        setIsLoading(false);
+        let data = doc.data();
+        if (data) {
+          setReport(data);
+        } else {
+          setFetchFailed(true);
+        }
       })
       .catch((error) => {
+        setFetchFailed(true);
         console.log(error);
       });
   }, [match]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const dbFirestore = await db.collection("reports").get(match.params.id);
+      setPriority(dbFirestore.docs.map((doc) => doc.data()));
+    };
+    fetchData();
+  }, []);
+
+  const update_priority = (level) => {
+    // TODO Fixa update i firestore som uppdaterar UI 
+    // db.collection("reports").doc(match.params.id).update({ priority: level });
+    const docRef = db
+      .collection("reports")
+      .where("docID", "==", match.params.id);
+
+    // db.collection("reports").where("reports.id", "==", "match.params.id")
+    // .onSnapshot(function(snapshot) {
+    //     snapshot.docChanges().forEach(function(change) {
+    //         if (change.type === "added") {
+    //             console.log("New city: ", change.doc.data());
+    //         }
+    //         if (change.type === "modified") {
+    //             console.log("Modified city: ", change.doc.data());
+    //         }
+    //         if (change.type === "removed") {
+    //             console.log("Removed city: ", change.doc.data());
+    //         }
+    //     });
+    // });
+
+    // docRef.onSnapshot((snapshot) => {
+    //   snapshot.docChanges().forEach((change) => {
+    //     if (change.type === "modified") {
+    //       const docData = change.doc.data();
+    //       console.log("🚀: update_priority -> docData", docData)
+    //       priority.push(docData);
+    //     }
+    //   });
+    //   setPriority(priority);
+    // });
+  };
+
+  // TODO add report timer script delete after 24 hours and postpone 2 weeks.  
+  const deleteReport = () => {
+    db.collection("reports").get(match.params.id);
+    // TODO Ta bort efter 24 timmar 
+    /*
+    Från ett real-lifescenario (+ om du vill ha CRUD) kanske man kan markera en rapport som "keep" eller nåt från att inte raderas.
+    eller tvärtom, markera som "archive" eller done så raderas den inom en tid.
+    */ 
+  };
+
+  const delayReport = () => {
+    // TODO Add two weeks to its current date
+    db.collection("reports").doc(match.params.id).update(report.date);
+  };
+
+  const my_json_object = {
+    // TODO byt ut emot dynamisk data
+    /* 
+        user_state: String  <= Behövs i db-modell. Exakt samma som resten (app-build, bluetooth etc)
+        Det appen/utvecklaren sen skickar in är en JSON.stringify({hela:"app state", finns:123})
+        I din app kör sen: JSON.parse(user_state) // För att få sträng till json-objekt (om det behövs)
+        Den failar om det inte är en valid json men vi utgår från att det är valid
+        Det är en till property i databasen/rapportmodelle. user_state. Det är en sträng
+    */
+    product: "Live JSON generator",
+    version: 3.1,
+    releaseDate: "2014-06-25T00:00:00.000Z",
+    demo: true,
+    person: {
+      id: 12345,
+      name: "John Doe",
+      phones: {
+        home: "800-123-4567",
+        mobile: "877-123-1234",
+      },
+      email: ["jd@example.com", "jd@example.org"],
+      dateOfBirth: "1980-01-02T00:00:00.000Z",
+      registered: true,
+      emergencyContacts: [
+        {
+          name: "Jane Doe",
+          phone: "888-555-1212",
+          relationship: "spouse",
+        },
+        {
+          name: "Justin Doe",
+          phone: "877-123-1212",
+          relationship: "parent",
+        },
+      ],
+    },
+  };
+
+  // TODO Change home to /reports and display 404 if no report
   return (
     <>
-      {report && (
+      {!report ? (
+        fetchFailed ? (
+          <p>Something is wacko here</p>
+        ) : (
+          <Spinner />
+        )
+      ) : (
         <Container>
           <Header>
             <h1>Bug report {match.params.id}</h1>
@@ -354,20 +474,57 @@ const Home = ({ match }) => {
                   />
                 </Item>
               </MainContent>
+              <SubHeader>
+                <h2>User state</h2>
+              </SubHeader>
+              <hr />
+              <MainContent>
+                {/* TODO Add dynamic json object from cloud function
+                 */}
+                <ReactJson src={my_json_object} />
+              </MainContent>
             </Section>
             <Sidebar>
               <div>
-                <h2>
-                  Actions <BsTrash size={20} />
-                </h2>
+                <span>Removed at {report.date}</span>
+                <H2>Actions</H2>
+                <Actions>
+                  <div>
+                    <p>Done</p>
+                    <button>
+                      <BsCheck size={20} onClick={deleteReport} />
+                    </button>
+                  </div>
+                  <div>
+                    <p>Delay</p>
+                    <button>
+                      <BsArrowClockwise size={20} onClick={delayReport} />
+                    </button>
+                  </div>
+                </Actions>
               </div>
 
-              <SidebarContent>
-                <p>Priority</p>
-                <Dot className="red"></Dot>
-                <Dot className="yellow"></Dot>
-                <Dot className="green"></Dot>
-              </SidebarContent>
+              <div>
+                <h2>Priority</h2>
+                <SidebarContent>
+                  <Dot
+                    className={!report.priority && "green"}
+                    onClick={() => {
+                      update_priority("");
+                    }}></Dot>
+                  <Dot
+                    className={report.priority === "warning" && "yellow"}
+                    onClick={() => {
+                      update_priority("warning");
+                    }}></Dot>
+                  <Dot
+                    className={report.priority === "critical" && "red"}
+                    onClick={() => {
+                      update_priority("critical");
+                    }}></Dot>
+                </SidebarContent>
+              </div>
+
               <div>
                 <h2>Integrations</h2>
               </div>
