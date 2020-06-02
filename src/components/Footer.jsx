@@ -37,10 +37,17 @@ const Footer = () => {
       <MainFooter>
         <div>
           <Row>
+              <h2>Buggy</h2>
             <Col>
-              <h4>Buggy</h4>
+            <h4>
+              Say hi 
+            </h4>
               <ListUnstyled>
-                <li>Test</li>
+                <li>
+                <a href="mailto:support@hampus.app?subject=Buggy issues">
+                    hello@hampus.app
+                  </a>
+                </li>
               </ListUnstyled>
             </Col>
             <Col>
@@ -50,15 +57,13 @@ const Footer = () => {
                   <Link to="/about-buggy">How does it work</Link>
                 </li>
                 <li>
-                  <a href="mailto:support@hampus.app?subject=Buggy issues">
-                    support@hampus.app
-                  </a>
+
                 </li>
               </ListUnstyled>
             </Col>
             {/* column3 */}
             <Col>
-              <h4>Links</h4>
+              <h4>Follow</h4>
               <ListUnstyled>
                 <li>
                   <a
