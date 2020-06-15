@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import withAuthorization from "../Session/withAuthorization";
 import { db } from "../Firebase/firebase";
 import Button from "../Styles/Button";
+
 import Spinner from "../Styles/Spinner";
 import styled from "styled-components";
 import {
@@ -14,8 +15,6 @@ import {
   FaGithub,
 } from "react-icons/fa";
 import {
-  BsCheck,
-  BsArrowClockwise,
   BsWifi,
   BsBatteryHalf,
   BsPhoneLandscape,
@@ -149,67 +148,21 @@ const Home = ({ match }) => {
       });
   }, [match]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const dbFirestore = await db.collection("reports").get(match.params.id);
-      setPriority(dbFirestore.docs.map((doc) => doc.data()));
-    };
-    fetchData();
-  }, []);
-
   const update_priority = (level) => {
-    // TODO Fixa update i firestore som uppdaterar UI 
-    // db.collection("reports").doc(match.params.id).update({ priority: level });
-    const docRef = db
-      .collection("reports")
-      .where("docID", "==", match.params.id);
+    // TODO Add realtime subscribe from firestore with onSubscribe and
+    db.collection("reports").doc(match.params.id).update({ priority: level });
 
-    // db.collection("reports").where("reports.id", "==", "match.params.id")
-    // .onSnapshot(function(snapshot) {
-    //     snapshot.docChanges().forEach(function(change) {
-    //         if (change.type === "added") {
-    //             console.log("New city: ", change.doc.data());
-    //         }
-    //         if (change.type === "modified") {
-    //             console.log("Modified city: ", change.doc.data());
-    //         }
-    //         if (change.type === "removed") {
-    //             console.log("Removed city: ", change.doc.data());
-    //         }
-    //     });
-    // });
-
-    // docRef.onSnapshot((snapshot) => {
-    //   snapshot.docChanges().forEach((change) => {
-    //     if (change.type === "modified") {
-    //       const docData = change.doc.data();
-    //       console.log("🚀: update_priority -> docData", docData)
-    //       priority.push(docData);
-    //     }
-    //   });
-    //   setPriority(priority);
-    // });
+    console.log(level);
   };
 
-  // TODO add report timer script delete after 24 hours and postpone 2 weeks.  
   const deleteReport = () => {
-    db.collection("reports").get(match.params.id);
-    // TODO Ta bort efter 24 timmar 
-    /*
-    Från ett real-lifescenario (+ om du vill ha CRUD) kanske man kan markera en rapport som "keep" eller nåt från att inte raderas.
-    eller tvärtom, markera som "archive" eller done så raderas den inom en tid.
-    */ 
-  };
-
-  const delayReport = () => {
-    // TODO Add two weeks to its current date
-    db.collection("reports").doc(match.params.id).update(report.date);
+    db.collection("reports").doc(match.params.id).update({ done: true });
   };
 
   const my_json_object = {
     // TODO byt ut emot dynamisk data
     /* 
-        user_state: String  <= Behövs i db-modell. Exakt samma som resten (app-build, bluetooth etc)
+        user_state: String  <==  Behövs i db-modell. Exakt samma som resten (app-build, bluetooth etc)
         Det appen/utvecklaren sen skickar in är en JSON.stringify({hela:"app state", finns:123})
         I din app kör sen: JSON.parse(user_state) // För att få sträng till json-objekt (om det behövs)
         Den failar om det inte är en valid json men vi utgår från att det är valid
@@ -403,7 +356,7 @@ const Home = ({ match }) => {
                 </Item>
               </MainContent>
               <SubHeader>
-                <h2>User Info</h2>
+                <h2>User info</h2>
               </SubHeader>
               <hr />
               <MainContent>
@@ -486,20 +439,12 @@ const Home = ({ match }) => {
             </Section>
             <Sidebar>
               <div>
-                <span>Removed at {report.date}</span>
                 <H2>Actions</H2>
                 <Actions>
                   <div>
-                    <p>Done</p>
-                    <button>
-                      <BsCheck size={20} onClick={deleteReport} />
-                    </button>
-                  </div>
-                  <div>
-                    <p>Delay</p>
-                    <button>
-                      <BsArrowClockwise size={20} onClick={delayReport} />
-                    </button>
+                    <Button>
+                      <span onClick={deleteReport}>Remove</span>
+                    </Button>
                   </div>
                 </Actions>
               </div>
@@ -520,7 +465,7 @@ const Home = ({ match }) => {
                   <Dot
                     className={report.priority === "critical" && "red"}
                     onClick={() => {
-                      update_priority("critical");
+                      setPriority(priority + "critical");
                     }}></Dot>
                 </SidebarContent>
               </div>

@@ -9,8 +9,6 @@ const Button = styled.button`
   color: black;
   border-style: none;
   text-transform: uppercase;
-  padding-left: 20px;
-  padding-right: 20px;
   margin-right: 20px;
   overflow-x: hidden;
   position: relative;
