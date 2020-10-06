@@ -12,6 +12,7 @@ import {
   FaReact,
   FaSlack,
   FaTrello,
+  FaCheckSquare,
   FaGithub,
 } from "react-icons/fa";
 import {
@@ -88,7 +89,7 @@ const Sidebar = styled.aside`
 
 const SidebarContent = styled.div`
   display: flex;
-  justify-content: start;
+  justify-content: space-around;
   align-items: baseline;
 `;
 
@@ -196,6 +197,8 @@ const Home = ({ match }) => {
       ],
     },
   };
+
+  // FIXME Break out this file to smaller components, not very react-ish
 
   // TODO Change home to /reports and display 404 if no report
   return (
@@ -438,16 +441,16 @@ const Home = ({ match }) => {
               </MainContent>
             </Section>
             <Sidebar>
-              <div>
+              <Actions>
                 <H2>Actions</H2>
-                <Actions>
+              <div>
                   <div>
                     <Button>
                       <span onClick={deleteReport}>Remove</span>
                     </Button>
                   </div>
+                </div>
                 </Actions>
-              </div>
 
               <div>
                 <h2>Priority</h2>
