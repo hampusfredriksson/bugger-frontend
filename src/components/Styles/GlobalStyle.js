@@ -27,12 +27,11 @@ a:link, a:visited {
 }
 
 .yellow {
-   background: #f1c40f;
+   background: #c0392b;
 }
 
 .red {
-  
-    background: #c0392b;
+    background: #f1c40f;
 }
 
 `;
