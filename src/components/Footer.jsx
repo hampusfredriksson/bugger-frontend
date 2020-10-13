@@ -10,7 +10,10 @@ const MainFooter = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  min-height: 100px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;
 `;
 
 const Row = styled.div`
