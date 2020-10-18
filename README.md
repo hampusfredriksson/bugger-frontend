@@ -4,7 +4,7 @@ Buggy is a react app for dealing with bugreports.
 
 ## Installation
 
-Use the token found in account tab at [Buggy](https://buggy.now.sh) to unlock read/write access to the database.
+The database is ready to use for everyone. Only people that has an account will be able to see information though. 
 
 ## Usage
 
