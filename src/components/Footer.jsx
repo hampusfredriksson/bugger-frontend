@@ -10,7 +10,7 @@ const MainFooter = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  position: absolute;
+  position: relative;
   bottom: 0;
   width: 100%;
   height: 2.5rem;
