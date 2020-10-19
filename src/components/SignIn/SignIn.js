@@ -7,47 +7,42 @@ import { withFirebase } from "../Firebase";
 
 import * as ROUTES from "../../constants/routes";
 
-const Form = styled.form`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 25rem;
-  padding: 2.5rem;
-  box-sizing: border-box;
-  background: rgba(0, 0, 0, 0.3);
-  color: white;
-  border-radius: 0.625rem;
+const Form = styled.div`
+  display: flex;
+  align-items: center;
+  flex-flow: column;
+  width: 300px;
+  height: 350px;
+  margin: 0 auto;
+  border: 2px solid #000;
+  border-radius: 20px;
+  background: #eee;
+  margin-top: 10rem;
+  margin-bottom: 10rem;
 `;
 
 const Button = styled.button`
-  outline: 0;
-  text-transform: uppercase;
-  background-color: #434c5e;
-  width: 100%;
-  border: 0;
-  padding: 15px;
-  color: #ffffff;
-  font-size: 14px;
-  -webkit-transition: all 0.3 ease;
-  transition: all 0.3 ease;
-  cursor: pointer;
-  &:hover {
-    background-color: #6d7c9c;
-  }
+  background: green;
+  color: #fff;
+  padding: 10px;
+  margin: 5px;
+  width: 150px;
+  border: none;
+  border-radius: 10px;
+  box-sizing: border-box;
+  &:disabled {
+  color: #d12028;
+  background: #a9a9a9;
+}
 `;
 
 const Input = styled.input`
-  width: 100%;
-  padding: 0.625rem 0;
-  font-size: 1.1rem;
-  color: #fff;
-  letter-spacing: 0.062rem;
-  margin-bottom: 1.875rem;
-  border: none;
-  border-bottom: 0.065rem solid #fff;
-  outline: none;
-  background: transparent;
+  border: 1px solid #000;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 5px;
+  width: 150px;
+  box-sizing: border-box;
 `;
 
 const SignInPage = () => (
@@ -76,7 +71,6 @@ class SignInFormBase extends Component {
       .then((authUser) => {
         this.setState({ ...INITIAL_STATE });
         this.props.history.push(ROUTES.ACCOUNT);
-        console.log("🚀:  -> onSubmit -> authUser", authUser);
       })
       .catch((error) => {
         this.setState({ error });
@@ -95,7 +89,7 @@ class SignInFormBase extends Component {
     const isInvalid = password === "" || email === "";
 
     return (
-      <Form onSubmit={this.onSubmit}>
+      <Form onClick={this.onSubmit}>
         <h2>Sign In</h2>
         <Input
           name="email"
