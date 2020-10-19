@@ -34,12 +34,6 @@ const HeroImage = styled.img`
   border-radius: 10%;
 `;
 
-// const Blob = styled.img`
-//   width: 20%;
-//   height: 20%;
-//   position: absolute;
-// `;
-
 const Landing = () => {
   return (
     <>
