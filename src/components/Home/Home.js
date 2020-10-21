@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import withAuthorization from "../Session/withAuthorization";
 import { db } from "../Firebase/firebase";
 import Button from "../Styles/Button";
+import NotFoundPage from "../NotFound";
 
 import Spinner from "../Styles/Spinner";
 import styled from "styled-components";
@@ -12,7 +13,6 @@ import {
   FaReact,
   FaSlack,
   FaTrello,
-  FaCheckSquare,
   FaGithub,
 } from "react-icons/fa";
 import {
@@ -160,7 +160,7 @@ const Home = ({ match }) => {
     db.collection("reports").doc(match.params.id).update({ done: true });
   };
 
-  const my_json_object = {
+  // const json = {
     // TODO byt ut emot dynamisk data
     /* 
         user_state: String  <==  Behövs i db-modell. Exakt samma som resten (app-build, bluetooth etc)
@@ -169,34 +169,34 @@ const Home = ({ match }) => {
         Den failar om det inte är en valid json men vi utgår från att det är valid
         Det är en till property i databasen/rapportmodelle. user_state. Det är en sträng
     */
-    product: "Live JSON generator",
-    version: 3.1,
-    releaseDate: "2014-06-25T00:00:00.000Z",
-    demo: true,
-    person: {
-      id: 12345,
-      name: "John Doe",
-      phones: {
-        home: "800-123-4567",
-        mobile: "877-123-1234",
-      },
-      email: ["jd@example.com", "jd@example.org"],
-      dateOfBirth: "1980-01-02T00:00:00.000Z",
-      registered: true,
-      emergencyContacts: [
-        {
-          name: "Jane Doe",
-          phone: "888-555-1212",
-          relationship: "spouse",
-        },
-        {
-          name: "Justin Doe",
-          phone: "877-123-1212",
-          relationship: "parent",
-        },
-      ],
-    },
-  };
+  //   product: "Live JSON generator",
+  //   version: 3.1,
+  //   releaseDate: "2014-06-25T00:00:00.000Z",
+  //   demo: true,
+  //   person: {
+  //     id: 12345,
+  //     name: "John Doe",
+  //     phones: {
+  //       home: "800-123-4567",
+  //       mobile: "877-123-1234",
+  //     },
+  //     email: ["jd@example.com", "jd@example.org"],
+  //     dateOfBirth: "1980-01-02T00:00:00.000Z",
+  //     registered: true,
+  //     emergencyContacts: [
+  //       {
+  //         name: "Jane Doe",
+  //         phone: "888-555-1212",
+  //         relationship: "spouse",
+  //       },
+  //       {
+  //         name: "Justin Doe",
+  //         phone: "877-123-1212",
+  //         relationship: "parent",
+  //       },
+  //     ],
+  //   },
+  // };
 
   // FIXME Break out this file to smaller components, not very react-ish
 
@@ -205,7 +205,7 @@ const Home = ({ match }) => {
     <>
       {!report ? (
         fetchFailed ? (
-          <p>Something is wacko here</p>
+          <NotFoundPage />
         ) : (
           <Spinner />
         )
@@ -437,20 +437,21 @@ const Home = ({ match }) => {
               <MainContent>
                 {/* TODO Add dynamic json object from cloud function
                  */}
-                <ReactJson src={my_json_object} />
+                <ReactJson src={report.json} />
               </MainContent>
             </Section>
             <Sidebar>
               <Actions>
                 <H2>Actions</H2>
-              <div>
+                {/* // FIXME Css is bonker */}
+                <div>
                   <div>
                     <Button>
                       <span onClick={deleteReport}>Remove</span>
                     </Button>
                   </div>
                 </div>
-                </Actions>
+              </Actions>
 
               <div>
                 <h2>Priority</h2>
