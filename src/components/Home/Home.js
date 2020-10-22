@@ -6,15 +6,7 @@ import NotFoundPage from "../NotFound";
 
 import Spinner from "../Styles/Spinner";
 import styled from "styled-components";
-import {
-  FaCode,
-  FaCogs,
-  FaCog,
-  FaReact,
-  FaSlack,
-  FaTrello,
-  FaGithub,
-} from "react-icons/fa";
+import { FaCode, FaCogs, FaCog, FaReact } from "react-icons/fa";
 import {
   BsWifi,
   BsBatteryHalf,
@@ -33,7 +25,6 @@ import {
 } from "react-icons/md";
 import { GoGlobe, GoPrimitiveDot } from "react-icons/go";
 import { FiUser, FiCode, FiBluetooth, FiWifi, FiCpu } from "react-icons/fi";
-import { DiJira } from "react-icons/di";
 
 import BugDetail from "../BugDetail";
 import ReactJson from "react-json-view";
@@ -100,7 +91,7 @@ const H2 = styled.h2`
 const Actions = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 1rem;
+  margin-bottom: 5rem;
 `;
 
 const Dot = styled.div`
@@ -160,47 +151,6 @@ const Home = ({ match }) => {
     db.collection("reports").doc(match.params.id).update({ done: true });
   };
 
-  // const json = {
-    // TODO byt ut emot dynamisk data
-    /* 
-        user_state: String  <==  Behövs i db-modell. Exakt samma som resten (app-build, bluetooth etc)
-        Det appen/utvecklaren sen skickar in är en JSON.stringify({hela:"app state", finns:123})
-        I din app kör sen: JSON.parse(user_state) // För att få sträng till json-objekt (om det behövs)
-        Den failar om det inte är en valid json men vi utgår från att det är valid
-        Det är en till property i databasen/rapportmodelle. user_state. Det är en sträng
-    */
-  //   product: "Live JSON generator",
-  //   version: 3.1,
-  //   releaseDate: "2014-06-25T00:00:00.000Z",
-  //   demo: true,
-  //   person: {
-  //     id: 12345,
-  //     name: "John Doe",
-  //     phones: {
-  //       home: "800-123-4567",
-  //       mobile: "877-123-1234",
-  //     },
-  //     email: ["jd@example.com", "jd@example.org"],
-  //     dateOfBirth: "1980-01-02T00:00:00.000Z",
-  //     registered: true,
-  //     emergencyContacts: [
-  //       {
-  //         name: "Jane Doe",
-  //         phone: "888-555-1212",
-  //         relationship: "spouse",
-  //       },
-  //       {
-  //         name: "Justin Doe",
-  //         phone: "877-123-1212",
-  //         relationship: "parent",
-  //       },
-  //     ],
-  //   },
-  // };
-
-  // FIXME Break out this file to smaller components, not very react-ish
-
-  // TODO Change home to /reports and display 404 if no report
   return (
     <>
       {!report ? (
@@ -435,8 +385,6 @@ const Home = ({ match }) => {
               </SubHeader>
               <hr />
               <MainContent>
-                {/* TODO Add dynamic json object from cloud function
-                 */}
                 <ReactJson src={report.json} />
               </MainContent>
             </Section>
@@ -445,11 +393,9 @@ const Home = ({ match }) => {
                 <H2>Actions</H2>
                 {/* // FIXME Css is bonker */}
                 <div>
-                  <div>
-                    <Button>
-                      <span onClick={deleteReport}>Remove</span>
-                    </Button>
-                  </div>
+                  <Button>
+                    <span onClick={deleteReport}>Delete</span>
+                  </Button>
                 </div>
               </Actions>
 
@@ -473,26 +419,6 @@ const Home = ({ match }) => {
                     }}></Dot>
                 </SidebarContent>
               </div>
-
-              <div>
-                <h2>Integrations</h2>
-              </div>
-              <p>
-                {" "}
-                <DiJira size={30} /> Jira
-              </p>
-              <p>
-                {" "}
-                <FaSlack size={30} /> Slack
-              </p>
-              <p>
-                {""}
-                <FaTrello size={30} /> Trello
-              </p>
-              <p>
-                {""}
-                <FaGithub size={30} /> Github
-              </p>
             </Sidebar>
           </Wrapper>
         </Container>
