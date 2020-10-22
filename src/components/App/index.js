@@ -53,7 +53,7 @@ const App = () => (
           <Route exact path={`${ROUTES.HOME}/:id`} component={HomePage} />
           <Route exact path={ROUTES.ACCOUNT} component={AccountPage} />
           <Route exact path={ROUTES.ADMIN} component={AdminPage} />
-          <Route path="*" component={NotFoundPage} />
+          <Route component={NotFoundPage} />
         </Switch>
         <Footer />
       </BrowserRouter>
