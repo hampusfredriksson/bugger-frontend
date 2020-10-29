@@ -10,7 +10,7 @@ import PasswordForgetPage from "../PasswordForget/PasswordForget";
 import HomePage from "../Home/Home";
 import AccountPage from "../Account/Account";
 import AdminPage from "../Admin/Admin";
-import NotFoundPage from '../NotFound'
+import NotFoundPage from "../NotFound";
 import Footer from "../Footer";
 
 import * as ROUTES from "../../constants/routes";
