@@ -5,7 +5,6 @@ import Button from "../Styles/Button";
 import Spinner from "../Styles/Spinner";
 
 const ApiKey = styled.div`
-
   margin-bottom: 16px;
   font-size: larger;
   font-weight: 600;
@@ -48,10 +47,14 @@ const Section = styled.section`
   flex: 4;
 `;
 
+// TODO Cleanup needed.
+
 const Account = () => {
   const [{ ...debugUrl }, setdebugUrl] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
 
   async function handleClick() {
     setIsLoading(true);
@@ -94,49 +97,80 @@ const Account = () => {
 
       const urlResponse = await response.json();
       setdebugUrl(urlResponse);
-      window.location.href = `mailto:support@hampus.app?subject=Bugreport:%20${minifiedDate}&body=Here%20is%20your%20URL:%20${urlResponse.url}`;
+      window.location.href = `mailto:${email}?subject=Bugreport:%20${minifiedDate}&body=Here%20is%20your%20URL:%20${urlResponse.url}`;
       setIsLoading(false);
     } catch (err) {
       setIsLoading(false);
       console.error(err);
     }
   }
-  let date = new Date(Date.now());
-  let minifiedDate = date.toLocaleString("sv-SE");
+  const date = new Date(Date.now());
+  const minifiedDate = date.toLocaleString("sv-SE");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setError(null);
+    setEmail("");
+  };
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    console.log(value);
+    if (!/[a-zA-Z0-9._\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,4}/.test(value))
+      setError("Email is invalid");
+    else setError(null);
+    setEmail(value);
+  };
 
   return (
     <AuthUserContext.Consumer>
       {(authUser) => (
-         <Container>
-
-         <Header>
-           <h1>Account</h1>
-         </Header>
-         <FlexGrid>
-           <Section>
-
-          <ApiKey>
-            <Code>{authUser.uid}</Code>
-          </ApiKey>
-          <h2>Account belongs to {authUser.email}</h2>
-          <Button onClick={handleClick}>
-            <div>
-              {isLoading ? (
-                <span>
-                  <Spinner />
-                </span>
-              ) : (
-                "Submit bug report"
-              )}
-            </div>
-          </Button>
-          <Code>
-            <a href={debugUrl.url}>{debugUrl.url}</a>{" "}
-          </Code>
-          </Section>
-         </FlexGrid>
-         <h3>Here, I don't know yet.</h3>
-          </Container>
+        <Container>
+          <Header>
+            <h1>Account</h1>
+          </Header>
+          <FlexGrid>
+            <Section>
+              <ApiKey>
+                <Code>{authUser.uid}</Code>
+              </ApiKey>
+              <h2>Account belongs to {authUser.email}</h2>
+              <Button onClick={handleClick}>
+                <div>
+                  {isLoading ? (
+                    <span>
+                      <Spinner />
+                    </span>
+                  ) : (
+                    "Submit bug report"
+                  )}
+                </div>
+              </Button>
+              <Code>
+                <a href={debugUrl.url}>{debugUrl.url}</a>{" "}
+              </Code>
+            </Section>
+          </FlexGrid>
+          <h3>Here, I don't know yet.</h3>
+          <p>{email}</p>
+          <form onSubmit={handleSubmit}>
+            <input
+              id="message"
+              name="message"
+              type="text"
+              onChange={handleChange}
+              value={email}
+            />
+            <button disabled={error} type="button">
+              generate url
+            </button>
+            {error && (
+              <label style={{ color: "red" }} htmlFor="email">
+                {error}
+              </label>
+            )}
+          </form>
+        </Container>
       )}
     </AuthUserContext.Consumer>
   );
