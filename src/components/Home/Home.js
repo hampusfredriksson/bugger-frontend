@@ -136,7 +136,6 @@ const Home = ({ match }) => {
       })
       .catch((error) => {
         setFetchFailed(true);
-        console.log(error);
       });
   }, [match]);
 
@@ -144,7 +143,6 @@ const Home = ({ match }) => {
     // TODO Add realtime subscribe from firestore with onSubscribe and
     db.collection("reports").doc(match.params.id).update({ priority: level });
 
-    console.log(level);
   };
 
   const deleteReport = () => {

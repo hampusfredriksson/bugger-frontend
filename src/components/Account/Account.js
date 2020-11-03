@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { AuthUserContext, withAuthorization } from "../Session/";
 import styled from "styled-components";
 import Button from "../Styles/Button";
@@ -46,9 +46,8 @@ const Section = styled.section`
   flex: 4;
 `;
 
-const deleteUser = (req, res) => {
-  console.log(req.body);
-};
+// const deleteUser = (req, res) => {
+// };
 
 // TODO Cleanup needed.
 
