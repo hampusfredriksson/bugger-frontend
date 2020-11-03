@@ -49,7 +49,7 @@ const Col = styled.div`
   padding-top: 100px;
 `;
 
-const H6 = styled.h6`
+const H6 = styled.h3`
   font-weight: 400;
 `;
 
@@ -118,7 +118,7 @@ const ColLg = styled.div`
   -ms-flex: 0 0 33.333333%;
   flex: 0 0 33.333333%;
   max-width: 33.333333%;
-  background-color: #EFEFF0;
+  background-color: #efeff0;
 `;
 
 const FeaturesItem = styled.div`
@@ -146,10 +146,18 @@ const Landing = () => {
             <h1>bugreport</h1>
             <br />
             <H6>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-              exercitationem ullam dolores repudiandae suscipit, porro commodi
-              voluptates natus aliquid dicta non, cum itaque fuga recusandae
-              deleniti quia ipsam voluptate doloribus.
+              For any type of project.
+              <br />
+              You can focus on your app. Follow the quick guide on{" "}
+              <a
+                href="https://github.com/hampusfredriksson/bugger-frontend"
+                target="_blank"
+                rel="noopener noreferrer">
+                {" "}
+                <u>github</u>
+              </a>{" "}
+              how to send data to bugger which will display information about
+              your user and their device. Easy Peasy.
             </H6>
             <br />
             <Button>
