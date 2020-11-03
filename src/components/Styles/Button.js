@@ -1,39 +1,37 @@
 import styled from "styled-components";
 
 const Button = styled.button`
-  cursor: pointer;
   display: inline-block;
-  font-weight: 600;
-  font-size: 14px;
-  height: 50px;
-  color: black;
-  border-style: none;
+  font-weight: 400;
+  color: #fff;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   text-transform: uppercase;
-  padding-left: 20px;
-  padding-right: 20px;
-  margin-right: 20px;
-  overflow-x: hidden;
-  position: relative;
-  transition: 0.25s ease all;
-  background: transparent;
-  text-decoration: none;
-  line-height: 45px;
-  &::after {
-    content: " ";
-    position: absolute;
-    display: block;
-    bottom: 0;
-    left: -100%;
-    height: 5px;
-    width: 100%;
-    background: #8d8d8d;
-    transition: 0.4s ease all;
+  border: 1px solid;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn {
+      transition: none;
+    }
   }
-  &:hover::after {
-    left: 0;
+  &:hover {
+    color: #d3d3d3;
+    text-decoration: none;
   }
   &:focus {
     outline: none;
+
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
   }
 `;
 

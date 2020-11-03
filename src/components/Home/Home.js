@@ -2,19 +2,12 @@ import React, { useState, useEffect } from "react";
 import withAuthorization from "../Session/withAuthorization";
 import { db } from "../Firebase/firebase";
 import Button from "../Styles/Button";
+import NotFoundPage from "../NotFound";
+
 import Spinner from "../Styles/Spinner";
 import styled from "styled-components";
+import { FaCode, FaCogs, FaCog, FaReact } from "react-icons/fa";
 import {
-  FaCode,
-  FaCogs,
-  FaCog,
-  FaReact,
-  FaSlack,
-  FaTrello,
-  FaGithub,
-} from "react-icons/fa";
-import {
-  BsTrash,
   BsWifi,
   BsBatteryHalf,
   BsPhoneLandscape,
@@ -32,9 +25,9 @@ import {
 } from "react-icons/md";
 import { GoGlobe, GoPrimitiveDot } from "react-icons/go";
 import { FiUser, FiCode, FiBluetooth, FiWifi, FiCpu } from "react-icons/fi";
-import { DiJira } from "react-icons/di";
 
 import BugDetail from "../BugDetail";
+import ReactJson from "react-json-view";
 
 const Container = styled.div`
   max-width: 960px;
@@ -91,7 +84,18 @@ const SidebarContent = styled.div`
   align-items: baseline;
 `;
 
-const Dot = styled.span`
+const H2 = styled.h2`
+  margin-bottom: 0;
+`;
+
+const Actions = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5rem;
+`;
+
+const Dot = styled.div`
+  margin-right: 10px;
   height: 15px;
   width: 15px;
   background-color: #bbb;
@@ -112,28 +116,48 @@ const Item = styled.div`
 
 const Home = ({ match }) => {
   const [report, setReport] = useState(null);
+  const [fetchFailed, setFetchFailed] = useState(false);
+  const [priority, setPriority] = useState("");
 
-  const [isLoading, setIsLoading] = useState(false);
+  // TODO Fix loading screen on Home position
 
   useEffect(() => {
-    setIsLoading(true);
     let docRef = db.collection("reports").doc(match.params.id);
 
     docRef
       .get()
       .then((doc) => {
-        console.log(doc.data());
-        setReport(doc.data());
-        setIsLoading(false);
+        let data = doc.data();
+        if (data) {
+          setReport(data);
+        } else {
+          setFetchFailed(true);
+        }
       })
       .catch((error) => {
-        console.log(error);
+        setFetchFailed(true);
       });
   }, [match]);
 
+  const update_priority = (level) => {
+    // TODO Add realtime subscribe from firestore with onSubscribe and
+    db.collection("reports").doc(match.params.id).update({ priority: level });
+
+  };
+
+  const deleteReport = () => {
+    db.collection("reports").doc(match.params.id).update({ done: true });
+  };
+
   return (
     <>
-      {report && (
+      {!report ? (
+        fetchFailed ? (
+          <NotFoundPage />
+        ) : (
+          <Spinner />
+        )
+      ) : (
         <Container>
           <Header>
             <h1>Bug report {match.params.id}</h1>
@@ -283,7 +307,7 @@ const Home = ({ match }) => {
                 </Item>
               </MainContent>
               <SubHeader>
-                <h2>User Info</h2>
+                <h2>User info</h2>
               </SubHeader>
               <hr />
               <MainContent>
@@ -354,39 +378,45 @@ const Home = ({ match }) => {
                   />
                 </Item>
               </MainContent>
+              <SubHeader>
+                <h2>User state</h2>
+              </SubHeader>
+              <hr />
+              <MainContent>
+                <ReactJson src={report.json} />
+              </MainContent>
             </Section>
             <Sidebar>
-              <div>
-                <h2>
-                  Actions <BsTrash size={20} />
-                </h2>
-              </div>
+              <Actions>
+                <H2>Actions</H2>
+                {/* // FIXME Css is bonker */}
+                <div>
+                  <Button>
+                    <span onClick={deleteReport}>Delete</span>
+                  </Button>
+                </div>
+              </Actions>
 
-              <SidebarContent>
-                <p>Priority</p>
-                <Dot className="red"></Dot>
-                <Dot className="yellow"></Dot>
-                <Dot className="green"></Dot>
-              </SidebarContent>
               <div>
-                <h2>Integrations</h2>
+                <h2>Priority</h2>
+                <SidebarContent>
+                  <Dot
+                    className={!report.priority && "green"}
+                    onClick={() => {
+                      update_priority("");
+                    }}></Dot>
+                  <Dot
+                    className={report.priority === "warning" && "yellow"}
+                    onClick={() => {
+                      update_priority("warning");
+                    }}></Dot>
+                  <Dot
+                    className={report.priority === "critical" && "red"}
+                    onClick={() => {
+                      setPriority(priority + "critical");
+                    }}></Dot>
+                </SidebarContent>
               </div>
-              <p>
-                {" "}
-                <DiJira size={30} /> Jira
-              </p>
-              <p>
-                {" "}
-                <FaSlack size={30} /> Slack
-              </p>
-              <p>
-                {""}
-                <FaTrello size={30} /> Trello
-              </p>
-              <p>
-                {""}
-                <FaGithub size={30} /> Github
-              </p>
             </Sidebar>
           </Wrapper>
         </Container>

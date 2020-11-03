@@ -6,6 +6,9 @@ import Navigation from "../components/Navigation";
 
 const Nav = styled.div`
   box-shadow: 0 4px 5px rgba(0, 0, 0, 0.5);
+`;
+
+const AppName = styled.div`
   display: flex;
 `;
 
@@ -19,7 +22,7 @@ const NavHeader = styled.div`
 `;
 
 const LogoImage = styled.img`
-  width: 100px;
+  width: 50px;
   padding: 0px;
 `;
 
@@ -27,9 +30,12 @@ const Header = () => {
   return (
     <Nav>
       <NavHeader>
-        <Link to="/">
-          <LogoImage src={Logo} />
-        </Link>
+        <AppName>
+          <h3>Buggy</h3>
+          <Link to="/">
+            <LogoImage src={Logo} />
+          </Link>
+        </AppName>
 
         <Navigation />
       </NavHeader>
