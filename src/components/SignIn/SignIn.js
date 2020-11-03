@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { compose } from "recompose";
 import styled from "styled-components";
 import { SignUpLink } from "../SignUp/SignUp";
@@ -14,7 +14,6 @@ const Form = styled.div`
   width: 300px;
   height: 350px;
   margin: 0 auto;
-  border: 2px solid #000;
   border-radius: 20px;
   background: #eee;
   margin-top: 10rem;
@@ -31,13 +30,13 @@ const Button = styled.button`
   border-radius: 10px;
   box-sizing: border-box;
   &:disabled {
-  color: #d12028;
-  background: #a9a9a9;
-}
+    color: #d12028;
+    background: #a9a9a9;
+  }
 `;
 
 const Input = styled.input`
-  border: 1px solid #000;
+  border: none;
   border-radius: 10px;
   padding: 10px;
   margin: 5px;
@@ -116,8 +115,17 @@ class SignInFormBase extends Component {
   }
 }
 
+const SignInLink = () => (
+  <p>
+    Have an account?{" "}
+    <Link style={{ color: "#80ded0" }} to={ROUTES.SIGN_IN}>
+      Sign In
+    </Link>
+  </p>
+);
+
 const SignInForm = compose(withRouter, withFirebase)(SignInFormBase);
 
 export default SignInPage;
 
-export { SignInForm };
+export { SignInForm, SignInLink };

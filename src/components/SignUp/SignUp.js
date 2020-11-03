@@ -3,16 +3,17 @@ import { Link, withRouter } from "react-router-dom";
 import { compose } from "recompose";
 import * as ROUTES from "../../constants/routes";
 import { withFirebase } from "../Firebase";
+import { SignInLink } from "../SignIn/SignIn";
+
 import styled from "styled-components";
 
-const Form = styled.div`
+const Form = styled.form`
   display: flex;
   align-items: center;
   flex-flow: column;
   width: 300px;
   height: 350px;
   margin: 0 auto;
-  border: 2px solid #000;
   border-radius: 20px;
   background: #eee;
   margin-top: 10rem;
@@ -35,7 +36,7 @@ const Button = styled.button`
 `;
 
 const Input = styled.input`
-  border: 1px solid #000;
+  border: none;
   border-radius: 10px;
   padding: 10px;
   margin: 5px;
@@ -62,21 +63,33 @@ class SignUpFormBase extends Component {
 
     this.state = { ...INITIAL_STATE };
   }
-  onSubmit = (event) => {
+  onSubmit = (e) => {
     const { email, passwordOne } = this.state;
 
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then((authUser) => {
-        this.setState({ ...INITIAL_STATE });
-        return this.props.firebase.user(authUser.user.uid).set(
-          {
-            email: email,
-            timestamp: Date.now(),
-            uid: authUser.user.uid,
-          },
-          { merge: true }
-        );
+        this.props.firebase
+          .user(authUser.user.uid)
+          .set(
+            {
+              email: email,
+              timestamp: Date.now(),
+              uid: authUser.user.uid,
+            },
+            { merge: true }
+          )
+          .then(() => {
+            this.setState({ ...INITIAL_STATE });
+            return this.props.firebase.user(authUser.user.uid).set(
+              {
+                email,
+                timestamp: Date.now(),
+                uid: authUser.user.uid,
+              },
+              { merge: true }
+            );
+          });
       })
       .then(() => {
         this.setState({ ...INITIAL_STATE });
@@ -86,11 +99,11 @@ class SignUpFormBase extends Component {
         this.setState({ error });
       });
 
-    event.preventDefault();
+    e.preventDefault();
   };
 
-  onChange = (event) => {
-    this.setState({ [event.target.name]: event.target.value });
+  onChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
   };
 
   render() {
@@ -128,6 +141,8 @@ class SignUpFormBase extends Component {
           <Button disabled={isInvalid} type="submit">
             Sign Up
           </Button>
+          <SignInLink />
+
           {error && <p>{error.message}</p>}
         </Form>
       </>
