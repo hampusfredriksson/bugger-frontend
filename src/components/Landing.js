@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import * as ROUTES from "../constants/routes";
 import hero from "../images/hero.svg";
+import Button from "../components/Styles/Button";
 
 import {
   RiComputerLine,
@@ -53,39 +54,6 @@ const H6 = styled.h3`
   font-weight: 400;
 `;
 
-const Button = styled.button`
-  display: inline-block;
-  font-weight: 400;
-  color: #fff;
-  text-align: center;
-  vertical-align: middle;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  border: 1px solid;
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  border-radius: 0.25rem;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-
-  @media (prefers-reduced-motion: reduce) {
-    .btn {
-      transition: none;
-    }
-  }
-  &:hover {
-    color: #d3d3d3;
-    text-decoration: none;
-  }
-  &:focus {
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-  }
-`;
-
 const Showcase = styled.div`
   -ms-flex: 0 0 75%;
   flex: 0 0 75%;
@@ -122,11 +90,13 @@ const ColLg = styled.div`
 `;
 
 const FeaturesItem = styled.div`
-  max-width: 20rem;
+  max-width: 30rem;
   padding-top: 7rem;
   padding-bottom: 7rem;
-  margin-right: auto;
+  margin-right: 20px;
   margin-bottom: 3rem;
+  text-align: center;
+  justify-content: center;
   height: 7rem;
 `;
 
@@ -179,9 +149,13 @@ const Landing = () => {
                 <h5>Easy managment</h5>
                 <Lead>
                   It's as easy as changing socks! (Well almost), add the wanted
-                  email in <Link to={ROUTES.ACCOUNT}>account</Link>
-                  and map the standard keys. Wildcards should be sent to the
-                  json three.
+                  email in your post request <b>mailTo</b> and map the standard{" "}
+                  <a
+                    href="https://github.com/hampusfredriksson/bugger-frontend"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    <u>keys</u>
+                  </a>
                 </Lead>
               </FeaturesItem>
             </ColLg>
